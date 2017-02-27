@@ -16,14 +16,19 @@ Then add these scripts to your package.json.
 }
 ````
 
-Then finally add a ````.env```` file with your extensions configuration.
+Then finally add a ````.env```` file with your extension's configuration.
 
 ````bash
 EXTENSION_NAME="My Extension"
-EXTENSION_CERTIFICATE_PASSWORD="password"
-EXTENSION_CERTIFICATE="certificate.p12"
-EXTENSION_BUNDLE_ID="com.your.extension.id"
 EXTENSION_APP_IDS="AEFT"
+EXTENSION_BUNDLE_ID="com.mycompany.myextension"
+
+EXTENSION_CERTIFICATE_COUNTRY="US"
+EXTENSION_CERTIFICATE_PROVINCE="CA"
+EXTENSION_CERTIFICATE_ORG="My Company"
+EXTENSION_CERTIFICATE_NAME="com.mycompany"
+EXTENSION_CERTIFICATE_PASSWORD="certificate-password"
+EXTENSION_CERTIFICATE="certificate.p12"
 ````
 
 ## Usage
