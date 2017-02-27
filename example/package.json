@@ -1,0 +1,24 @@
+{
+  "name": "characteristic-cee",
+  "title": "My Extension",
+  "version": "1.0.0-beta.0",
+  "private": true,
+  "devDependencies": {
+    "create-cep-extension": "^1.0.0-beta.3",
+    "lodash": "^4.17.4",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "scripts": {
+    "start": "node ./node_modules/create-cep-extension/scripts/start.js",
+    "build": "node ./node_modules/create-cep-extension/scripts/build.js",
+    "bin": "node ./node_modules/create-cep-extension/scripts/bin.js",
+    "reset": "node ./node_modules/create-cep-extension/scripts/reset.js"
+  },
+  "eslintConfig": {
+    "extends": "react-app",
+    "rules": {
+      "import/no-webpack-loader-syntax": 0
+    }
+  }
+}

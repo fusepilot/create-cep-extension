@@ -1,0 +1,10 @@
+node_modules
+
+build/
+bin/
+
+.DS_Store
+.env
+npm-debug.log
+
+certificate.*
