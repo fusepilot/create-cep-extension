@@ -42,7 +42,7 @@ export function evalExtendscript(code, options) {
       })
     }
 
-    if (option.async) {
+    if (options.async) {
       setTimeout(f, 0)
     } else {
       doEvalScript()
