@@ -77,7 +77,7 @@ Evaluates the specified code. Returns a Promise.
 evalExtendscript('writeLn("Hello Foo");') // writes "Hello Foo" to the info panel
 ````
 
-If you return a JSON string using [json2](https://github.com/douglascrockford/JSON-js) or similar from extendscript, you can get the parsed result.
+If you return a JSON string using [json2](https://github.com/douglascrockford/JSON-js) or similar from Extendscript, you can get the parsed result.
 
 ````javascript
 evalExtendscript('JSON.stringifiy({foo: "bar"});')
