@@ -39,7 +39,7 @@ EXTENSION_CERTIFICATE="certificate.p12"
 
 ````yarn run start````
 
-The extension will now be accesible from the target application's extensions menu.
+The extension will now be accesible from the target application's extensions menu. You will also be able to view the extension in a browser window, usually from [http://localhost:3000](http://localhost:3000). If you make a change, the window will reload (most of the time).
 
 ### Building
 
@@ -52,6 +52,7 @@ The extension will be built into the build directory.
 ````yarn run bin````
 
 The build directory will be packaged into a ````.zxp```` in the bin directory.
+
 
 ## Troubleshooting
 
@@ -69,4 +70,4 @@ If you get errors when running ````yarn run bin````, you probably need to build 
 
 * Create boilerplate script.
 * Script to initially create ````certificate.p12````. Still need to do that part manually up front right now.
-* Create ````.jsxbin````'s automatically and smoothly without hacks. Adobe has made this nearly impossible on macOS, so not sure if its worth the trouble. Especially since .jsxbin dont really do much to deter hackers.
+* Create ````.jsxbin````'s automatically and smoothly. Adobe has made this nearly impossible to do on macOS, so not sure if its worth the trouble. Especially since .jsxbin doesn't really deter hackers.
