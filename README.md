@@ -33,6 +33,8 @@ EXTENSION_CERTIFICATE_PASSWORD="mypassword"
 EXTENSION_CERTIFICATE="certificate.p12"
 ````
 
+
+
 ## Usage
 
 ### Development
@@ -54,9 +56,30 @@ The extension will be built into the build directory.
 The build directory will be packaged into a ````.zxp```` in the bin directory.
 
 
+
+## Communicating with Extendscript
+
+There are two helper methods that you can import and use to ease Extendscript communication.
+
+### `loadExtendscript(extendScriptFileName: string): Promise`
+
+Loads and evaluates the specified file in the src/extendscript directory. Returns a promise with the result.
+
+### `evalExtendscript(code: string): Promise`
+
+Evaluates the specified code. Returns a Promise.
+
+## Other helper methods
+
+### `openURLInDefaultBrowser(url: string)`
+
+Opens the url in the default browser. Will also work when viewing outside the target application in a browser.
+
 ## Troubleshooting
 
 If you get errors when running ````yarn run bin````, you probably need to build first, ````yarn run build````.
+
+
 
 ## Contributing
 
@@ -65,6 +88,8 @@ If you get errors when running ````yarn run bin````, you probably need to build 
 3. Commit your changes: `git commit -am 'Add some feature'`
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request
+
+
 
 ## Todo
 
