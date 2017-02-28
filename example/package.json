@@ -1,6 +1,5 @@
 {
-  "name": "characteristic-cee",
-  "title": "My Extension",
+  "name": "create-cep-extension-example",
   "version": "1.0.0",
   "private": true,
   "devDependencies": {

@@ -4,6 +4,8 @@ A near zero config approach to creating CEP extensions with Webpack and React.
 
 ## Installation
 
+Recommended to download and start from the [example project]().
+
 ````yarn add -D create-cep-extension````
 
 Then add these scripts to your package.json. 
