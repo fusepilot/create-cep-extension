@@ -25,9 +25,9 @@ EXTENSION_BUNDLE_ID="com.mycompany.myextension"
 
 EXTENSION_CERTIFICATE_COUNTRY="US"
 EXTENSION_CERTIFICATE_PROVINCE="CA"
-EXTENSION_CERTIFICATE_ORG="My Company"
+EXTENSION_CERTIFICATE_ORG="MyCompany"
 EXTENSION_CERTIFICATE_NAME="com.mycompany"
-EXTENSION_CERTIFICATE_PASSWORD="certificate-password"
+EXTENSION_CERTIFICATE_PASSWORD="mypassword"
 EXTENSION_CERTIFICATE="certificate.p12"
 ````
 
@@ -50,6 +50,10 @@ The extension will be built into the build directory.
 ````yarn run bin````
 
 The build directory will be packaged into a ````.zxp```` in the bin directory.
+
+## Troubleshooting
+
+If you get errors when running ````yarn run bin````, you probably need to build first, ````yarn run build````.
 
 ## Contributing
 

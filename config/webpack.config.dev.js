@@ -149,10 +149,6 @@ module.exports = {
         test: /\.css$/,
         loader: 'style-loader!css-loader?importLoaders=1!postcss-loader'
       },
-      {
-        test: /\.styl$/,
-        loader: 'style-loader!css-loader?importLoaders=1!stylus-loader',
-      },
       // "file" loader for svg
       {
         test: /\.svg$/,

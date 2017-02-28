@@ -22,7 +22,7 @@ const CERTIFICATE = process.env.EXTENSION_CERTIFICATE
 const package = require(path.join(cwd, 'package.json'))
 const VERSION = package.version
 
-const fileName = `${NAME}-${VERSION}.zxp`
+const fileName = `"${NAME}-${VERSION}.zxp"`
 const outputPath = path.join(paths.appBin, fileName)
 
 
@@ -54,8 +54,8 @@ function sign() {
   const options = {
     input: paths.appBuild,
     output: outputPath,
-    cert: 'certificate.p12',
-    password: PASSWORD,
+    cert: process.env.EXTENSION_CERTIFICATE,
+    password: process.env.EXTENSION_CERTIFICATE_PASSWORD,
   }
   return new Promise((resolve, reject) => {
     zxp.sign(options, (error, result) => {
