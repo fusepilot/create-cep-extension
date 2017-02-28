@@ -4,7 +4,7 @@ A near zero config approach to creating CEP extensions with Webpack and React.
 
 ## Installation
 
-It's recommended to download and start from the [example project](https://github.com/fusepilot/create-cep-extension-example).
+It's recommended to download and start from the [example project](https://github.com/fusepilot/create-cep-extension-example). If you do, skip to the usage section below.
 
 ````yarn add -D create-cep-extension````
 
