@@ -65,9 +65,25 @@ There are two helper methods that you can import and use to ease Extendscript co
 
 Loads and evaluates the specified file in the src/extendscript directory. Returns a promise with the result.
 
+````javascript
+loadExtendscript('index.jsx')
+````
+
 ### `evalExtendscript(code: string): Promise`
 
 Evaluates the specified code. Returns a Promise.
+
+````javascript
+evalExtendscript('writeLn("Hello Foo");') // writes "Hello Foo" to the info panel
+````
+
+If you return a JSON string using [json2](https://github.com/douglascrockford/JSON-js) or similar from extendscript, you can get the parsed result.
+
+````javascript
+evalExtendscript('JSON.stringifiy({foo: "bar"});')
+  .then(result => console.log(result)) // prints {foo: "bar"}
+  .catch(error => console.warn(error))
+````
 
 ## Other helper methods
 
