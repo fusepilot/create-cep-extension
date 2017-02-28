@@ -4,7 +4,7 @@ A near zero config approach to creating CEP extensions with Webpack and React.
 
 ## Installation
 
-Recommended to download and start from the [example project]().
+Recommended to download and start from the [example project](https://github.com/fusepilot/create-cep-extension-example).
 
 ````yarn add -D create-cep-extension````
 
@@ -67,6 +67,6 @@ If you get errors when running ````yarn run bin````, you probably need to build 
 
 ## Todo
 
-• Create boilerplate script.
-• Script to initially create ````certificate.p12````. Still need to do that part manually up front right now.
-• Create ````.jsxbin````'s automatically and smoothly without hacks. Adobe has made this nearly impossible on macOS, so not sure if its worth the trouble. Especially since .jsxbin dont really do much to deter hackers.
+* Create boilerplate script.
+* Script to initially create ````certificate.p12````. Still need to do that part manually up front right now.
+* Create ````.jsxbin````'s automatically and smoothly without hacks. Adobe has made this nearly impossible on macOS, so not sure if its worth the trouble. Especially since .jsxbin dont really do much to deter hackers.
