@@ -12,18 +12,18 @@ require('dotenv').config()
 
 var paths = require('../config/paths');
 
-const NAME = process.env.EXTENSION_NAME
-const PASSWORD = process.env.EXTENSION_CERTIFICATE_PASSWORD
-const CERTIFICATE = process.env.EXTENSION_CERTIFICATE
-const BUNDLE_ID = process.env.EXTENSION_BUNDLE_ID
-const BUNDLE_VERSION = process.env.EXTENSION_BUNDLE_VERSION
-const CEP_VERSION = process.env.EXTENSION_CEP_VERSION
-const PANEL_WIDTH = process.env.EXTENSION_PANEL_WIDTH
-const PANEL_HEIGHT = process.env.EXTENSION_PANEL_HEIGHT
-const CEF_PARAMS = process.env.EXTENSION_CEF_PARAMS
-const AUTO_OPEN_REMOTE_DEBUGGER = process.env.EXTENSION_AUTO_OPEN_REMOTE_DEBUGGER
-const ENABLE_PLAYERDEBUGMODE = process.env.EXTENSION_ENABLE_PLAYERDEBUGMODE
-const TAIL_LOGS = process.env.EXTENSION_TAIL_LOGS
+const NAME = process.env.EXTENSION_NAME || ''
+const PASSWORD = process.env.EXTENSION_CERTIFICATE_PASSWORD || ''
+const CERTIFICATE = process.env.EXTENSION_CERTIFICATE || ''
+const BUNDLE_ID = process.env.EXTENSION_BUNDLE_ID || ''
+const BUNDLE_VERSION = process.env.EXTENSION_BUNDLE_VERSION || ''
+const CEP_VERSION = process.env.EXTENSION_CEP_VERSION || ''
+const PANEL_WIDTH = process.env.EXTENSION_PANEL_WIDTH || ''
+const PANEL_HEIGHT = process.env.EXTENSION_PANEL_HEIGHT || ''
+const CEF_PARAMS = process.env.EXTENSION_CEF_PARAMS || ''
+const AUTO_OPEN_REMOTE_DEBUGGER = process.env.EXTENSION_AUTO_OPEN_REMOTE_DEBUGGER || ''
+const ENABLE_PLAYERDEBUGMODE = process.env.EXTENSION_ENABLE_PLAYERDEBUGMODE || ''
+const TAIL_LOGS = process.env.EXTENSION_TAIL_LOGS || ''
 const APP_IDS = process.env.EXTENSION_APP_IDS || 'AEFT'
 
 const package = require('../package.json')
