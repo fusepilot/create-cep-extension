@@ -10,9 +10,6 @@ module.exports = function ({
   cefParams = ['--allow-file-access-from-files', '--allow-file-access', '--enable-nodejs', '--mixed-context']
 }) {
   var commandLineParams = cefParams.map(cefParam => `<Parameter>${cefParam}</Parameter>`)
-  var appIds = Array.isArray(bundleAppIds) ? bundleAppIds : [bundleAppIds]
-  var appVersions = Array.isArray(bundleAppVersions) ? bundleAppVersions : [bundleAppVersions]
-  var hosts = appIds.map((host, i) => `<Host Name="${host}" Version="${appVersions[i]}" />`)
 
   return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ExtensionManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ExtensionBundleId="${bundleId}" ExtensionBundleName="${bundleName}" ExtensionBundleVersion="${bundleVersion}" Version="${cepVersion}">
@@ -21,7 +18,7 @@ module.exports = function ({
   </ExtensionList>
   <ExecutionEnvironment>
     <HostList>
-      ${hosts.join('\n      ')}
+      <Host Name="${appId}" Version="${appVersion}" />
     </HostList>
     <LocaleList>
       <Locale Code="All"/>
