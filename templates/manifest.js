@@ -18,7 +18,7 @@ module.exports = function ({
   </ExtensionList>
   <ExecutionEnvironment>
     <HostList>
-      <Host Name="${appId}" Version="${appVersion}" />
+      <Host Name="${bundleAppIds}" Version="${bundleAppVersions}" />
     </HostList>
     <LocaleList>
       <Locale Code="All"/>
