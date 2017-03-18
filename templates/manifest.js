@@ -1,8 +1,8 @@
 module.exports = function ({
   bundleName = 'My Extension',
   bundleId = 'com.test.test.extension',
-  bundleAppIds = 'AEFT',
-  bundleAppVersions = '[13.0,15.9]',
+  bundleHostIds = 'PHXS, PHSP, IDSN, AICY, ILST, PPRO, AEFT, PRLD, FLPR, DRWV',
+  bundleHostVersions = '[0.0,99.9]',
   bundleVersion = '1.0.0',
   cepVersion = '6.0',
   width = '500',
@@ -10,6 +10,7 @@ module.exports = function ({
   cefParams = ['--allow-file-access-from-files', '--allow-file-access', '--enable-nodejs', '--mixed-context']
 }) {
   var commandLineParams = cefParams.map(cefParam => `<Parameter>${cefParam}</Parameter>`)
+  var hosts = bundleHostIds.split(',').map(bundleHostId => `<Host Name="${bundleHostId.trim()}" Version="${bundleHostVersions}" />`)
 
   return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ExtensionManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ExtensionBundleId="${bundleId}" ExtensionBundleName="${bundleName}" ExtensionBundleVersion="${bundleVersion}" Version="${cepVersion}">
@@ -18,7 +19,7 @@ module.exports = function ({
   </ExtensionList>
   <ExecutionEnvironment>
     <HostList>
-      <Host Name="${bundleAppIds}" Version="${bundleAppVersions}" />
+      ${hosts.join('\n      ')}
     </HostList>
     <LocaleList>
       <Locale Code="All"/>

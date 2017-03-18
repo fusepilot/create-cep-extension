@@ -22,10 +22,7 @@ Then finally add a ````.env```` file with your extension's configuration.
 
 ````bash
 EXTENSION_NAME="My Extension"
-EXTENSION_APP_IDS="AEFT"
-EXTENSION_APP_VERSIONS="13.0"
 EXTENSION_BUNDLE_ID="com.mycompany.myextension"
-
 EXTENSION_CERTIFICATE_COUNTRY="US"
 EXTENSION_CERTIFICATE_PROVINCE="CA"
 EXTENSION_CERTIFICATE_ORG="MyCompany"
@@ -34,7 +31,15 @@ EXTENSION_CERTIFICATE_PASSWORD="mypassword"
 EXTENSION_CERTIFICATE="certificate.p12"
 ````
 
+### Target Hosts
 
+By default, the extension will target all known Adobe hosts. To target specific hosts, add a `EXTENSION_HOST_IDS` variable to your `.env` with a comma delimited list of the host id's you want to target.
+
+For example, to target just In Design and After Effects, you would add this to your `.env` file:
+
+````bash
+EXTENSION_HOST_IDS="IDSN, AEFT"
+````
 
 ## Usage
 

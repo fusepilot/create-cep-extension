@@ -24,8 +24,8 @@ const CEF_PARAMS = process.env.EXTENSION_CEF_PARAMS || ''
 const AUTO_OPEN_REMOTE_DEBUGGER = process.env.EXTENSION_AUTO_OPEN_REMOTE_DEBUGGER || ''
 const ENABLE_PLAYERDEBUGMODE = process.env.EXTENSION_ENABLE_PLAYERDEBUGMODE || ''
 const TAIL_LOGS = process.env.EXTENSION_TAIL_LOGS || ''
-const APP_IDS = process.env.EXTENSION_APP_IDS || 'AEFT'
-const APP_VERSIONS = process.env.EXTENSION_APP_VERSIONS || '[13.0,15.9]'
+const HOST_IDS = process.env.EXTENSION_HOST_IDS
+const HOST_VERSIONS = process.env.EXTENSION_HOST_VERSIONS
 
 
 const package = require('../package.json')
@@ -119,7 +119,7 @@ function writeExtensionTemplates(env, {port}={}) {
 
   if (env === 'dev') {
     // write .debug file
-    const debugContents = debugTemplate(BUNDLE_ID, APP_IDS.split(','))
+    const debugContents = debugTemplate(BUNDLE_ID, HOST_IDS)
     fs.writeFileSync(path.join(paths.appBuild, '.debug'), debugContents)
   }
 
@@ -128,8 +128,8 @@ function writeExtensionTemplates(env, {port}={}) {
     bundleName: NAME,
     bundleId: BUNDLE_ID,
     bundleVersion: VERSION,
-    bundleAppIds: APP_IDS,
-    bundleAppVersions: APP_VERSIONS
+    bundleHostIds: HOST_IDS,
+    bundleHostVersions: HOST_VERSIONS
   })
   fs.writeFileSync(path.join(paths.appBuild, 'CSXS/manifest.xml'), manifestContents)
 
