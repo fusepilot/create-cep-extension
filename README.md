@@ -23,6 +23,7 @@ Then finally add a ````.env```` file with your extension's configuration.
 ````bash
 EXTENSION_NAME="My Extension"
 EXTENSION_APP_IDS="AEFT"
+EXTENSION_APP_VERSIONS="13.0"
 EXTENSION_BUNDLE_ID="com.mycompany.myextension"
 
 EXTENSION_CERTIFICATE_COUNTRY="US"

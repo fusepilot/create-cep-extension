@@ -1,6 +1,8 @@
 module.exports = function ({
   bundleName = 'My Extension',
   bundleId = 'com.test.test.extension',
+  bundleAppIds = 'AEFT',
+  bundleAppVersions = '[13.0,15.9]',
   bundleVersion = '1.0.0',
   cepVersion = '6.0',
   width = '500',
@@ -8,6 +10,7 @@ module.exports = function ({
   cefParams = ['--allow-file-access-from-files', '--allow-file-access', '--enable-nodejs', '--mixed-context']
 }) {
   var commandLineParams = cefParams.map(cefParam => `<Parameter>${cefParam}</Parameter>`)
+
   return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ExtensionManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ExtensionBundleId="${bundleId}" ExtensionBundleName="${bundleName}" ExtensionBundleVersion="${bundleVersion}" Version="${cepVersion}">
   <ExtensionList>
@@ -15,7 +18,7 @@ module.exports = function ({
   </ExtensionList>
   <ExecutionEnvironment>
     <HostList>
-      <Host Name="AEFT" Version="[13.0,15.9]" />
+      <Host Name="${bundleAppIds}" Version="${bundleAppVersions}" />
     </HostList>
     <LocaleList>
       <Locale Code="All"/>

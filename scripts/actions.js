@@ -25,6 +25,8 @@ const AUTO_OPEN_REMOTE_DEBUGGER = process.env.EXTENSION_AUTO_OPEN_REMOTE_DEBUGGE
 const ENABLE_PLAYERDEBUGMODE = process.env.EXTENSION_ENABLE_PLAYERDEBUGMODE || ''
 const TAIL_LOGS = process.env.EXTENSION_TAIL_LOGS || ''
 const APP_IDS = process.env.EXTENSION_APP_IDS || 'AEFT'
+const APP_VERSIONS = process.env.EXTENSION_APP_VERSIONS || '[13.0,15.9]'
+
 
 const package = require('../package.json')
 const VERSION = package.version.split('-')[0] // because ae doesnt load extensions that arent in the exact format '1.0.0'
@@ -126,6 +128,8 @@ function writeExtensionTemplates(env, {port}={}) {
     bundleName: NAME,
     bundleId: BUNDLE_ID,
     bundleVersion: VERSION,
+    bundleAppIds: APP_IDS,
+    bundleAppVersions: APP_VERSIONS
   })
   fs.writeFileSync(path.join(paths.appBuild, 'CSXS/manifest.xml'), manifestContents)
 
