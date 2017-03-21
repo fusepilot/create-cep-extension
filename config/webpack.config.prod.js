@@ -107,6 +107,22 @@ module.exports = {
       //
       // "file" loader makes sure those assets end up in the `build` folder.
       // When you `import` an asset, you get its filename.
+      {
+        exclude: [
+          /\.html$/,
+          /\.(js|jsx)$/,
+          /\.css$/,
+          /\.json$/,
+          /\.bmp$/,
+          /\.gif$/,
+          /\.jpe?g$/,
+          /\.png$/,
+        ],
+        loader: 'file-loader',
+        options: {
+          name: 'static/media/[name].[hash:8].[ext]',
+        },
+      },
       // "url" loader works just like "file" loader but it also embeds
       // assets smaller than specified size as data URLs to avoid requests.
       {
@@ -117,7 +133,7 @@ module.exports = {
         loader: 'url-loader',
         query: {
           // limit: 10000,
-          name: 'media/[name].[ext]'
+          name: 'static/media/[name].[hash:8].[ext]',
         }
       },
       {
@@ -153,14 +169,6 @@ module.exports = {
           loader: 'css-loader?importLoaders=1!postcss-loader'
         })
       },
-      // "file" loader for svg
-      {
-        test: /\.svg$/,
-        loader: 'file-loader',
-        options: {
-          name: 'media/[name].[hash].[ext]'
-        }
-      }
     ]
   },
   plugins: [
