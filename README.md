@@ -14,7 +14,7 @@ Then add these scripts to your package.json.
 "scripts": {
   "start": "node ./node_modules/create-cep-extension/scripts/start.js",
   "build": "node ./node_modules/create-cep-extension/scripts/build.js",
-  "bin": "node ./node_modules/create-cep-extension/scripts/bin.js",
+  "bin": "node ./node_modules/create-cep-extension/scripts/bin.js"
 }
 ````
 
