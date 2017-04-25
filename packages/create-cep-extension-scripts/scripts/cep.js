@@ -18,8 +18,7 @@ function getSettings () {
 
   return {
     NAME: process.env.NAME || 'My CEP Extension',
-    PASSWORD: process.env.CERTIFICATE_PASSWORD || '',
-    CERTIFICATE_FILENAME: process.env.CERTIFICATE_FILENAME || '',
+    VERSION: VERSION || '1.0.0',
     BUNDLE_ID: process.env.BUNDLE_ID || 'my.cep.extension',
     BUNDLE_VERSION: process.env.BUNDLE_VERSION || '1.0.0',
     CEP_VERSION: process.env.CEP_VERSION || '',
@@ -31,11 +30,12 @@ function getSettings () {
     TAIL_LOGS: process.env.TAIL_LOGS || '',
     HOST_IDS: process.env.HOST_IDS,
     HOST_VERSIONS: process.env.HOST_VERSIONS,
+    CERTIFICATE_PASSWORD: process.env.CERTIFICATE_PASSWORD || 'certificate-password',
+    CERTIFICATE_FILENAME: process.env.CERTIFICATE_FILENAME || 'certificate.p12',
     CERTIFICATE_COUNTRY: process.env.CERTIFICATE_COUNTRY || 'US',
     CERTIFICATE_PROVINCE: process.env.CERTIFICATE_PROVINCE || 'CA',
     CERTIFICATE_ORG: process.env.CERTIFICATE_ORG || 'org',
-    CERTIFICATE_NAME: process.env.CERTIFICATE_NAME || 'name',
-    VERSION: VERSION || '1.0.0'
+    CERTIFICATE_NAME: process.env.CERTIFICATE_NAME || 'name'
   }
 }
 
@@ -231,5 +231,6 @@ module.exports = {
   build,
   createBuildFolder,
   compileMessages,
-  buildMessages
+  buildMessages,
+  getSettings
 }

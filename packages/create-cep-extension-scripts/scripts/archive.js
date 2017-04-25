@@ -16,72 +16,90 @@ const execSync = require('child_process').execSync
 const cwd = process.cwd()
 const cep = require('./cep')
 
-const NAME = process.env.EXTENSION_NAME || 'My Extension'
-const PASSWORD = process.env.EXTENSION_CERTIFICATE_PASSWORD || 'password'
-const CERTIFICATE = process.env.EXTENSION_CERTIFICATE || 'certificate.p12'
+function preArchiveCheck () {
+  const {
+    CERTIFICATE_PASSWORD,
+    CERTIFICATE_COUNTRY,
+    CERTIFICATE_PROVINCE,
+    CERTIFICATE_ORG,
+    CERTIFICATE_NAME
+  } = cep.getSettings()
 
-const packageJSON = require(path.join(cwd, 'package.json'))
-const VERSION = packageJSON.version || '1.0.0'
+  if (!fs.existsSync(paths.appBuild)) {
+    console.log()
+    console.log(
+      `${chalk.red('No build directory found to archive.')} Run ${chalk.blue('yarn run build')} first and then try again.`
+    )
+    console.log()
+    process.exit(1)
+  }
 
-const fileName = `"${NAME}-${VERSION}.zxp"`
-const outputPath = path.join(paths.appArchive, fileName)
-
-function preBinCheck () {
-  if (!process.env.EXTENSION_CERTIFICATE_PASSWORD) {
+  if (!CERTIFICATE_PASSWORD) {
     console.log(
       chalk.yellow(
-        'No EXTENSION_CERTIFICATE_PASSWORD environment variable found. Defaulting to "password". Don\'t deploy before fixing.'
+        'No CERTIFICATE_PASSWORD environment variable found. Defaulting to "password". Don\'t deploy before fixing.'
       )
     )
   }
 
-  if (!process.env.EXTENSION_CERTIFICATE_COUNTRY) {
+  if (!CERTIFICATE_COUNTRY) {
     console.log(
       chalk.yellow(
-        'No EXTENSION_CERTIFICATE_COUNTRY environment variable found. Defaulting to "US". Don\'t deploy before fixing.'
+        'No CERTIFICATE_COUNTRY environment variable found. Defaulting to "US". Don\'t deploy before fixing.'
       )
     )
   }
 
-  if (!process.env.EXTENSION_CERTIFICATE_PROVINCE) {
+  if (!CERTIFICATE_PROVINCE) {
     console.log(
       chalk.yellow(
-        'No EXTENSION_CERTIFICATE_PROVINCE environment variable found. Defaulting to "CA". Don\'t deploy before fixing.'
+        'No CERTIFICATE_PROVINCE environment variable found. Defaulting to "CA". Don\'t deploy before fixing.'
       )
     )
   }
 
-  if (!process.env.EXTENSION_CERTIFICATE_ORG) {
+  if (!CERTIFICATE_ORG) {
     console.log(
       chalk.yellow(
-        'No EXTENSION_CERTIFICATE_ORG environment variable found. Defaulting to "My Organization". Don\'t deploy before fixing.'
+        'No CERTIFICATE_ORG environment variable found. Defaulting to "My Organization". Don\'t deploy before fixing.'
       )
     )
   }
 
-  if (!process.env.EXTENSION_CERTIFICATE_NAME) {
+  if (!CERTIFICATE_NAME) {
     console.log(
       chalk.yellow(
-        'No EXTENSION_CERTIFICATE_NAME environment variable found. Defaulting to "My Name". Don\'t deploy before fixing.'
+        'No CERTIFICATE_NAME environment variable found. Defaulting to "My Name". Don\'t deploy before fixing.'
       )
     )
   }
 }
 
 function certificate () {
-  const options = {
-    country: process.env.EXTENSION_CERTIFICATE_COUNTRY || 'US',
-    province: process.env.EXTENSION_CERTIFICATE_PROVINCE || 'CA',
-    org: process.env.EXTENSION_CERTIFICATE_ORG || 'org',
-    name: process.env.EXTENSION_CERTIFICATE_NAME || 'name',
-    password: PASSWORD,
-    output: CERTIFICATE
-  }
+  const {
+    CERTIFICATE_PASSWORD,
+    CERTIFICATE_FILENAME,
+    CERTIFICATE_COUNTRY,
+    CERTIFICATE_PROVINCE,
+    CERTIFICATE_ORG,
+    CERTIFICATE_NAME
+  } = cep.getSettings()
+
   return new Promise((resolve, reject) => {
-    zxp.selfSignedCert(options, (error, result) => {
-      if (error) reject(error)
-      else resolve(result)
-    })
+    zxp.selfSignedCert(
+      {
+        country: CERTIFICATE_COUNTRY || 'US',
+        province: CERTIFICATE_PROVINCE || 'CA',
+        org: CERTIFICATE_ORG || 'org',
+        name: CERTIFICATE_NAME || 'name',
+        password: CERTIFICATE_PASSWORD,
+        output: CERTIFICATE_FILENAME
+      },
+      (error, result) => {
+        if (error) reject(error)
+        else resolve(result)
+      }
+    )
   })
 }
 
@@ -92,39 +110,58 @@ function fixZXPPermissions () {
   })
 }
 
+function getOutputFilename () {
+  const { NAME, VERSION } = cep.getSettings()
+
+  return `"${NAME}-${VERSION}.zxp"`
+}
+
+function getOutputPath (fileName) {
+  return path.join(paths.appArchive, fileName)
+}
+
 function sign () {
-  const options = {
-    input: paths.appBuild,
-    output: outputPath,
-    cert: CERTIFICATE,
-    password: PASSWORD
-  }
+  const { CERTIFICATE_PASSWORD, CERTIFICATE_FILENAME } = cep.getSettings()
+
+  const filename = getOutputFilename()
+  const outputPath = getOutputPath(filename)
+
   return new Promise((resolve, reject) => {
-    zxp.sign(options, (error, result) => {
-      if (error) reject(error)
-      else {
-        resolve({
-          result,
-          fileName,
-          outputPath
-        })
+    zxp.sign(
+      {
+        input: paths.appBuild,
+        output: outputPath,
+        cert: CERTIFICATE_FILENAME,
+        password: CERTIFICATE_PASSWORD
+      },
+      (error, result) => {
+        if (error) reject(error)
+        else {
+          resolve({
+            result,
+            filename,
+            outputPath
+          })
+        }
       }
-    })
+    )
   })
 }
 
 // Create the production build and print the deployment instructions.
 function bin () {
+  const filename = getOutputFilename()
+  const outputPath = getOutputPath(filename)
+
   fs.removeSync(outputPath)
+  preArchiveCheck()
   console.log('Signing and archiving...')
   console.log()
-  preBinCheck()
   fixZXPPermissions()
     .then(certificate)
     .then(sign)
     .then(result => {
-      console.log()
-      console.log(`Created ${chalk.cyan(result.fileName)}`)
+      console.log(`Created ${chalk.cyan(result.filename)}`)
       console.log()
     })
     .catch(error => console.error(error))
