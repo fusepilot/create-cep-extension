@@ -1,6 +1,6 @@
 {
   "name": "create-cep-extension-scripts",
-  "version": "1.0.0-y.0",
+  "version": "1.0.0-beta.7",
   "author": "Michael Delaney",
   "description": "Configuration and scripts for Create CEP Extension.",
   "repository": "fusepilot/create-cep-extension",
