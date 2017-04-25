@@ -1,6 +1,6 @@
-# Create React App [![Build Status](https://travis-ci.org/facebookincubator/create-react-app.svg?branch=master)](https://travis-ci.org/facebookincubator/create-react-app)
+# Create CEP Extension
 
-Create React apps with no build configuration.
+Create CEP Extensions with no build configuration. Closely matches functionality from [Create React App](https://github.com/facebookincubator/create-react-app).
 
 * [Getting Started](#getting-started) – How to create a new app.
 * [User Guide](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md) – How to develop apps bootstrapped with Create React App.
@@ -11,10 +11,10 @@ If something doesn’t work please [file an issue](https://github.com/facebookin
 ## Quick Overview
 
 ```sh
-npm install -g create-react-app
+npm install -g create-cep-extension
 
-create-react-app my-app
-cd my-app/
+create-cep-extension my-cep-extension
+cd my-cep-extension
 npm start
 ```
 
@@ -37,7 +37,7 @@ Just create a project, and you’re good to go.
 Install it once globally:
 
 ```sh
-npm install -g create-react-app
+npm install -g create-cep-extension
 ```
 
 **You’ll need to have Node >= 4 on your machine**.
@@ -51,19 +51,22 @@ npm install -g create-react-app
 To create a new app, run:
 
 ```sh
-create-react-app my-app
-cd my-app
+create-cep-extension my-cep-extension
+cd my-cep-extension
 ```
 
-It will create a directory called `my-app` inside the current folder.<br>
+It will create a directory called `my-cep-extension` inside the current folder.<cep-extension
 Inside that directory, it will generate the initial project structure and install the transitive dependencies:
 
 ```
-my-app/
+my-cep-extension
   README.md
   node_modules/
   package.json
   .gitignore
+  .env
+  extendscript/
+    index.jsx
   public/
     favicon.ico
     index.html
@@ -104,147 +107,100 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
-## User Guide
+### `npm run archive` or `yarn archive`
 
-The [User Guide](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md) includes information on different topics, such as:
+Creates a ZXP archive of the `build` folder to the `archive` folder.<br>
 
-- [Updating to New Releases](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#updating-to-new-releases)
-- [Folder Structure](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#folder-structure)
-- [Available Scripts](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#available-scripts)
-- [Supported Language Features and Polyfills](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#supported-language-features-and-polyfills)
-- [Syntax Highlighting in the Editor](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#syntax-highlighting-in-the-editor)
-- [Displaying Lint Output in the Editor](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#displaying-lint-output-in-the-editor)
-- [Debugging in the Editor](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#debugging-in-the-editor)
-- [Changing the Page `<title>`](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#changing-the-page-title)
-- [Installing a Dependency](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#installing-a-dependency)
-- [Importing a Component](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#importing-a-component)
-- [Adding a Stylesheet](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#adding-a-stylesheet)
-- [Post-Processing CSS](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#post-processing-css)
-- [Adding a CSS Preprocessor (Sass, Less etc.)](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#adding-a-css-preprocessor-sass-less-etc)
-- [Adding Images, Fonts, and Files](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#adding-images-fonts-and-files)
-- [Using the `public` Folder](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#using-the-public-folder)
-- [Using Global Variables](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#using-global-variables)
-- [Adding Bootstrap](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#adding-bootstrap)
-- [Adding Flow](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#adding-flow)
-- [Adding Custom Environment Variables](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#adding-custom-environment-variables)
-- [Can I Use Decorators?](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#can-i-use-decorators)
-- [Integrating with an API Backend](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#integrating-with-an-api-backend)
-- [Proxying API Requests in Development](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#proxying-api-requests-in-development)
-- [Using HTTPS in Development](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#using-https-in-development)
-- [Generating Dynamic `<meta>` Tags on the Server](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#generating-dynamic-meta-tags-on-the-server)
-- [Pre-Rendering into Static HTML Files](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#pre-rendering-into-static-html-files)
-- [Running Tests](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#running-tests)
-- [Developing Components in Isolation](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#developing-components-in-isolation)
-- [Making a Progressive Web App](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#making-a-progressive-web-app)
-- [Deployment](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#deployment)
-- [Advanced Configuration](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#advanced-configuration)
-- [Troubleshooting](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#troubleshooting)
+You can then send the ZXP archive to your users to install using a ZXP installer. For instance:
 
-A copy of the user guide will be created as `README.md` in your project folder.
+- [aescripts + aeplugins ZXP Installer](http://aescripts.com/learn/zxp-installer/)
+- [ZXP Installer](http://zxpinstaller.com/)
 
-## How to Update to New Versions?
+## Environment Variables
 
-Please refer to the [User Guide](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#updating-to-new-releases) for this and other information.
+You can customize the name of the extension and multiple other variables by modifying the `.env` file. 
 
-## Philosophy
+````bash
+NAME="My Extension"
+BUNDLE_ID="com.mycompany.myextension"
+````
 
-* **One Dependency:** There is just one build dependency. It uses Webpack, Babel, ESLint, and other amazing projects, but provides a cohesive curated experience on top of them.
+### Target Hosts
 
-* **No Configuration Required:** You don't need to configure anything. Reasonably good configuration of both development and production builds is handled for you so you can focus on writing code.
+By default, the extension will target all known Adobe hosts. To target specific hosts, add a `EXTENSION_HOST_IDS` variable to your `.env` with a comma delimited list of the host id's you want to target.
 
-* **No Lock-In:** You can “eject” to a custom setup at any time. Run a single command, and all the configuration and build dependencies will be moved directly into your project, so you can pick up right where you left off.
+For example, to target just In Design and After Effects, you would add this to your `.env` file:
 
-## Why Use This?
+````bash
+HOST_IDS="IDSN, AEFT"
+````
 
-**If you’re getting started** with React, use `create-react-app` to automate the build of your app. There is no configuration file, and `create-cep-extension-scripts` is the only extra build dependency in your `package.json`. Your environment will have everything you need to build a modern React app:
+### Cerificate Variables
 
-* React, JSX, ES6, and Flow syntax support.
-* Language extras beyond ES6 like the object spread operator.
-* A dev server that lints for common errors.
-* Import CSS and image files directly from JavaScript.
-* Autoprefixed CSS, so you don’t need `-webkit` or other prefixes.
-* A `build` script to bundle JS, CSS, and images for production, with sourcemaps.
+In order to create a valid ZXP, you will need to provide the following variables replaced with the correct information inside your `.env`.
 
-**The feature set is intentionally limited**. It doesn’t support advanced features such as server rendering or CSS modules. The tool is also **non-configurable** because it is hard to provide a cohesive experience and easy updates across a set of tools when the user can tweak anything.
+```bash
+CERTIFICATE_COUNTRY="US"
+CERTIFICATE_PROVINCE="CA"
+CERTIFICATE_ORG="MyCompany"
+CERTIFICATE_NAME="com.mycompany"
+CERTIFICATE_PASSWORD="mypassword"
+```
 
-**You don’t have to use this.** Historically it has been easy to [gradually adopt](https://www.youtube.com/watch?v=BF58ZJ1ZQxY) React. However many people create new single-page React apps from scratch every day. We’ve heard [loud](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4) and [clear](https://twitter.com/thomasfuchs/status/708675139253174273) that this process can be error-prone and tedious, especially if this is your first JavaScript build stack. This project is an attempt to figure out a good way to start developing React apps.
+## Communicating with Extendscript
 
-### Converting to a Custom Setup
+There are few functions that you can import from the `cep-interface` package to ease Extendscript communication from CEP.
 
-**If you’re a power user** and you aren’t happy with the default configuration, you can “eject” from the tool and use it as a boilerplate generator.
+### `loadExtendscript(extendScriptFileName: string): Promise`
 
-Running `npm run eject` copies all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. Commands like `npm start` and `npm run build` will still work, but they will point to the copied scripts so you can tweak them. At this point, you’re on your own.
+Loads and evaluates the specified file in the src/extendscript directory. Returns a promise with the result.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+````javascript
+import { loadExtendscript } from 'cep-interface'
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+loadExtendscript('index.jsx')
+````
 
-## Limitations
+### `evalExtendscript(code: string): Promise`
 
-Some features are currently **not supported**:
+Evaluates the specified code. Returns a Promise.
 
-* Server rendering.
-* Some experimental syntax extensions (e.g. decorators).
-* CSS Modules.
-* Importing LESS or Sass directly ([but you still can use them](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#adding-a-css-preprocessor-sass-less-etc)).
-* Hot reloading of components.
+````javascript
+import { evalExtendscript } from 'cep-interface'
 
-Some of them might get added in the future if they are stable, are useful to majority of React apps, don’t conflict with existing tools, and don’t introduce additional configuration.
+evalExtendscript('writeLn("Hello Foo");') // writes "Hello Foo" to the info panel
+````
 
-## What’s Inside?
+If you return a JSON string using [json2](https://github.com/douglascrockford/JSON-js) or similar from Extendscript, you can get the parsed result.
 
-The tools used by Create React App are subject to change.
-Currently it is a thin layer on top of many amazing community projects, such as:
+````javascript
+import { evalExtendscript } from 'cep-interface'
 
-* [webpack](https://webpack.github.io/) with [webpack-dev-server](https://github.com/webpack/webpack-dev-server), [html-webpack-plugin](https://github.com/ampedandwired/html-webpack-plugin) and [style-loader](https://github.com/webpack/style-loader)
-* [Babel](http://babeljs.io/) with ES6 and extensions used by Facebook (JSX, [object spread](https://github.com/sebmarkbage/ecmascript-rest-spread/commits/master), [class properties](https://github.com/jeffmo/es-class-public-fields))
-* [Autoprefixer](https://github.com/postcss/autoprefixer)
-* [ESLint](http://eslint.org/)
-* [Jest](http://facebook.github.io/jest)
-* and others.
+evalExtendscript('JSON.stringifiy({foo: "bar"});')
+  .then(result => console.log(result)) // prints {foo: "bar"}
+  .catch(error => console.warn(error))
+````
 
-All of them are transitive dependencies of the provided npm package.
+## Other functions
+
+There are a few other functions available in addition.
+
+### `openURLInDefaultBrowser(url: string)`
+
+````javascript
+import { openURLInDefaultBrowser } from 'cep-interface'
+
+openURLInDefaultBrowser('www.google.com')
+````
+
+Opens the url in the default browser. Will also work when viewing outside the target application in a browser.
 
 ## Contributing
 
-We'd love to have your helping hand on `create-react-app`! See [CONTRIBUTING.md](CONTRIBUTING.md) for more information on what we're looking for and how to get started.
+We'd love to have your helping hand on `create-cep-extension`! See [CONTRIBUTING.md](CONTRIBUTING.md) for more information on what we're looking for and how to get started.
 
-## React Native
+## Todo
 
-Looking for something similar, but for React Native?<br>
-Check out [Create React Native App](https://github.com/react-community/create-react-native-app/).
-
-## Acknowledgements
-
-We are grateful to the authors of existing related projects for their ideas and collaboration:
-
-* [@eanplatter](https://github.com/eanplatter)
-* [@insin](https://github.com/insin)
-* [@mxstbr](https://github.com/mxstbr)
-
-## Alternatives
-
-If you don’t agree with the choices made in this project, you might want to explore alternatives with different tradeoffs.<br>
-Some of the more popular and actively maintained ones are:
-
-* [insin/nwb](https://github.com/insin/nwb)
-* [mozilla-neutrino/neutrino-dev](https://github.com/mozilla-neutrino/neutrino-dev)
-* [NYTimes/kyt](https://github.com/NYTimes/kyt)
-* [zeit/next.js](https://github.com/zeit/next.js)
-* [gatsbyjs/gatsby](https://github.com/gatsbyjs/gatsby)
-
-Notable alternatives also include:
-
-* [enclave](https://github.com/eanplatter/enclave)
-* [motion](https://github.com/motion/motion)
-* [quik](https://github.com/satya164/quik)
-* [sagui](https://github.com/saguijs/sagui)
-* [roc](https://github.com/rocjs/roc)
-* [aik](https://github.com/d4rkr00t/aik)
-* [react-app](https://github.com/kriasoft/react-app)
-* [dev-toolkit](https://github.com/stoikerty/dev-toolkit)
-* [tarec](https://github.com/geowarin/tarec)
-* [sku](https://github.com/seek-oss/sku)
-
-You can also use module bundlers like [webpack](http://webpack.github.io) and [Browserify](http://browserify.org/) directly.<br>
-React documentation includes [a walkthrough](https://facebook.github.io/react/docs/package-management.html) on this topic.
+* Improve target host configuration per [#4](https://github.com/fusepilot/create-cep-extension/pull/4).
+* Create ````.jsxbin````'s automatically and smoothly. Adobe has made this nearly impossible to do on macOS, so not sure if its worth the trouble. Especially since .jsxbin doesn't really deter hackers.
+* Testing.
