@@ -2,10 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import './index.css'
-import { inCEPEnvironment, loadExtendscript, evalExtendscript } from 'cep-interface'
+import { inCEPEnvironment, evalExtendscript } from 'cep-interface'
 
 if (inCEPEnvironment()) {
-  evalExtendscript('writeLn("Hello Foos");') // writes "Hello Foo" to the info panel
+  // write "Hello World!" to the info panel inside the host application
+  evalExtendscript('writeLn("Hello World!");')
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))
