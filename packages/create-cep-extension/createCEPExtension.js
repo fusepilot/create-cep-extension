@@ -132,7 +132,7 @@ function createApp (name, verbose, version, template) {
     process.exit(1)
   }
 
-  console.log(`Creating a new React app in ${chalk.green(root)}.`)
+  console.log(`Creating a new CEP extension in ${chalk.green(root)}.`)
   console.log()
 
   const packageJson = {
