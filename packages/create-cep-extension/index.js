@@ -36,22 +36,24 @@
 //   /!\ DO NOT MODIFY THIS FILE /!\
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-'use strict';
+'use strict'
 
-var chalk = require('chalk');
+var chalk = require('chalk')
 
-var currentNodeVersion = process.versions.node;
+var currentNodeVersion = process.versions.node
 if (currentNodeVersion.split('.')[0] < 4) {
   console.error(
     chalk.red(
       'You are running Node ' +
         currentNodeVersion +
         '.\n' +
-        'Create React App requires Node 4 or higher. \n' +
+        'Create CEP Extension requires Node 4 or higher. \n' +
         'Please update your version of Node.'
     )
-  );
-  process.exit(1);
+  )
+  process.exit(1)
 }
 
-require('./createReactApp');
+console.log(__dirname)
+
+require('./createCEPExtension')

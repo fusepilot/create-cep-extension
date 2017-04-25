@@ -1,24 +1,25 @@
 {
-  "name": "create-react-app",
-  "version": "1.3.0",
+  "name": "create-cep-extension",
+  "version": "1.0.0-beta.10",
   "keywords": [
     "react"
   ],
-  "description": "Create React apps with no build configuration.",
-  "repository": "facebookincubator/create-react-app",
+  "author": "Michael Delaney",
+  "description": "Create CEP Extensions with no build configuration.",
+  "repository": "fusepilot/create-cep-extension",
   "license": "BSD-3-Clause",
   "engines": {
     "node": ">=4"
   },
   "bugs": {
-    "url": "https://github.com/facebookincubator/create-react-app/issues"
+    "url": "https://github.com/fusepilot/create-cep-extension/issues"
   },
   "files": [
     "index.js",
-    "createReactApp.js"
+    "createCEPExtension.js"
   ],
   "bin": {
-    "create-react-app": "./index.js"
+    "create-cep-extension": "./index.js"
   },
   "dependencies": {
     "chalk": "^1.1.1",
