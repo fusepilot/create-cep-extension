@@ -15,12 +15,14 @@ var script = process.argv[2]
 var args = process.argv.slice(3)
 
 switch (script) {
-  case 'bin':
+  case 'archive':
   case 'build':
   case 'eject':
   case 'start':
   case 'test':
-    var result = spawn.sync('node', [require.resolve('../scripts/' + script)].concat(args), { stdio: 'inherit' })
+    var result = spawn.sync('node', [require.resolve('../scripts/' + script)].concat(args), {
+      stdio: 'inherit'
+    })
     if (result.signal) {
       if (result.signal === 'SIGKILL') {
         console.log(

@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "bin": "node packages/create-cep-extension-scripts/scripts/bin.js",
     "build": "node packages/create-cep-extension-scripts/scripts/build.js",
+    "archive": "node packages/create-cep-extension-scripts/scripts/archive.js",
     "changelog": "lerna-changelog",
     "create-react-app": "tasks/cra.sh",
     "e2e": "tasks/e2e-simple.sh",

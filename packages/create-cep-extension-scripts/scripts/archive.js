@@ -24,7 +24,7 @@ const packageJSON = require(path.join(cwd, 'package.json'))
 const VERSION = packageJSON.version || '1.0.0'
 
 const fileName = `"${NAME}-${VERSION}.zxp"`
-const outputPath = path.join(paths.appBin, fileName)
+const outputPath = path.join(paths.appArchive, fileName)
 
 function preBinCheck () {
   if (!process.env.EXTENSION_CERTIFICATE_PASSWORD) {

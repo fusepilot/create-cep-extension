@@ -74,7 +74,7 @@ function getServedPath (appPackageJson) {
 // config after eject: we're in ./config/
 module.exports = {
   appBuild: resolveApp('build'),
-  appBin: resolveApp('bin'),
+  appArchive: resolveApp('archive'),
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
   appIndexJs: resolveApp('src/index.js'),
@@ -100,7 +100,7 @@ function resolveOwn (relativePath) {
 module.exports = {
   appPath: resolveApp('.'),
   appBuild: resolveApp('build'),
-  appBin: resolveApp('bin'),
+  appArchive: resolveApp('archive'),
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
   appIndexJs: resolveApp('src/index.js'),
@@ -122,7 +122,8 @@ module.exports = {
 
 const ownPackageJson = require('../package.json')
 const reactScriptsPath = resolveApp(`node_modules/${ownPackageJson.name}`)
-const reactScriptsLinked = fs.existsSync(reactScriptsPath) && fs.lstatSync(reactScriptsPath).isSymbolicLink()
+const reactScriptsLinked =
+  fs.existsSync(reactScriptsPath) && fs.lstatSync(reactScriptsPath).isSymbolicLink()
 
 // config before publish: we're in ./packages/create-cep-extension-scripts/config/
 if (
@@ -132,7 +133,7 @@ if (
   module.exports = {
     appPath: resolveApp('.'),
     appBuild: resolveOwn('../../build'),
-    appBin: resolveOwn('../../bin'),
+    appArchive: resolveOwn('../../archive'),
     appPublic: resolveOwn('template/public'),
     appHtml: resolveOwn('template/public/index.html'),
     appIndexJs: resolveOwn('template/src/index.js'),

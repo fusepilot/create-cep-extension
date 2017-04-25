@@ -35,7 +35,7 @@ module.exports = function (appPath, appName, verbose, originalDirectory, templat
   appPackage.scripts = {
     start: 'create-cep-extension-scripts start',
     build: 'create-cep-extension-scripts build',
-    bin: 'create-cep-extension-scripts bin',
+    archive: 'create-cep-extension-scripts archive',
     test: 'create-cep-extension-scripts test --env=jsdom',
     eject: 'create-cep-extension-scripts eject'
   }
