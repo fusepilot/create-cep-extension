@@ -4,7 +4,7 @@
   "author": "Michael Delaney",
   "description": "Methods to communicate between CEP panels and their host environments.",
   "main": "index.js",
-  "repository": "fusepilot/create-cep-extension-scripts",
+  "repository": "fusepilot/create-cep-extension",
   "license": "MIT",
   "engines": {
     "node": ">=4"
