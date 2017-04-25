@@ -128,6 +128,7 @@ function build (previousFileSizes) {
       )
       console.log()
       console.log(`The ${chalk.cyan('build')} folder is ready to be deployed.`)
+      console.log(`To create a ZXP archive, use ${chalk.cyan('yarn run archive')}.`)
       console.log(`To publish it at ${chalk.green(publicUrl)}, run:`)
       // If script deploy has been added to package.json, skip the instructions
       if (typeof appPackage.scripts.deploy === 'undefined') {
@@ -155,10 +156,12 @@ function build (previousFileSizes) {
     } else if (publicPath !== '/') {
       console.log()
       console.log(`The ${chalk.cyan('build')} folder is ready to be deployed.`)
+      console.log(`To create a ZXP archive, use ${chalk.cyan('yarn run archive')}.`)
       console.log()
     } else {
       const build = path.relative(process.cwd(), paths.appBuild)
       console.log(`The ${chalk.cyan(build)} folder is ready to be deployed.`)
+      console.log(`To create a ZXP archive, use ${chalk.cyan('yarn run archive')}.`)
       console.log()
       if (useYarn) {
         console.log(`  ${chalk.cyan('yarn')} global add serve`)
