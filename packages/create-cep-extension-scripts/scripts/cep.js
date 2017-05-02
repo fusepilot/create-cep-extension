@@ -1,20 +1,20 @@
-const fs = require('fs-extra')
-const path = require('path')
-const chalk = require('chalk')
-const webpack = require('webpack')
-const { execSync, spawn } = require('child_process')
-const del = require('del')
-const debugTemplate = require('./templates/.debug')
-const manifestTemplate = require('./templates/manifest')
-const panelTemplate = require('./templates/panel')
-const uglifyJS = require('uglify-js')
-require('dotenv').config({ silent: true })
+const fs = require('fs-extra');
+const path = require('path');
+const chalk = require('chalk');
+const webpack = require('webpack');
+const { execSync, spawn } = require('child_process');
+const del = require('del');
+const debugTemplate = require('./templates/.debug');
+const manifestTemplate = require('./templates/manifest');
+const panelTemplate = require('./templates/panel');
+const uglifyJS = require('uglify-js');
+require('dotenv').config({ silent: true });
 
-var paths = require('../config/paths')
+var paths = require('../config/paths');
 
-function getSettings () {
-  const packageJSON = require('../package.json')
-  const VERSION = packageJSON.version.split('-')[0] // because ae doesnt load extensions that arent in the exact format '1.0.0'
+function getSettings() {
+  const packageJSON = require('../package.json');
+  const VERSION = packageJSON.version.split('-')[0]; // because ae doesnt load extensions that arent in the exact format '1.0.0'
 
   return {
     NAME: process.env.NAME || 'My CEP Extension',
@@ -30,13 +30,14 @@ function getSettings () {
     TAIL_LOGS: process.env.TAIL_LOGS || '',
     HOST_IDS: process.env.HOST_IDS,
     HOST_VERSIONS: process.env.HOST_VERSIONS,
-    CERTIFICATE_PASSWORD: process.env.CERTIFICATE_PASSWORD || 'certificate-password',
+    CERTIFICATE_PASSWORD: process.env.CERTIFICATE_PASSWORD ||
+      'certificate-password',
     CERTIFICATE_FILENAME: process.env.CERTIFICATE_FILENAME || 'certificate.p12',
     CERTIFICATE_COUNTRY: process.env.CERTIFICATE_COUNTRY || 'US',
     CERTIFICATE_PROVINCE: process.env.CERTIFICATE_PROVINCE || 'CA',
     CERTIFICATE_ORG: process.env.CERTIFICATE_ORG || 'org',
-    CERTIFICATE_NAME: process.env.CERTIFICATE_NAME || 'name'
-  }
+    CERTIFICATE_NAME: process.env.CERTIFICATE_NAME || 'name',
+  };
 }
 
 // const zxpPath = (function () {
@@ -45,39 +46,39 @@ function getSettings () {
 //   return exec_name;
 // })()
 
-function createBuildFolder () {
-  fs.removeSync(paths.appBuild)
+function createBuildFolder() {
+  fs.removeSync(paths.appBuild);
 }
 
-function printErrors (summary, errors) {
-  console.log(chalk.red(summary))
-  console.log()
+function printErrors(summary, errors) {
+  console.log(chalk.red(summary));
+  console.log();
   errors.forEach(err => {
-    console.log(err.message || err)
-    console.log()
-  })
+    console.log(err.message || err);
+    console.log();
+  });
 }
 
-function copyPublicFolder () {
+function copyPublicFolder() {
   fs.copySync(paths.appPublic, paths.appBuild, {
     dereference: true,
-    filter: file => file !== paths.appHtml
-  })
+    filter: file => file !== paths.appHtml,
+  });
 }
 
-function copyExtendscriptFolder () {
+function copyExtendscriptFolder() {
   fs.copySync(paths.appExtendscriptSrc, paths.appBuild + '/extendscript', {
-    dereference: true
-  })
+    dereference: true,
+  });
 }
 
-function symlinkExtendscriptFolder () {
-  const dest = paths.appBuild + '/extendscript'
+function symlinkExtendscriptFolder() {
+  const dest = paths.appBuild + '/extendscript';
   // fs.removeSync(dest)
-  require('fs').symlinkSync(paths.appExtendscriptSrc, dest)
+  require('fs').symlinkSync(paths.appExtendscriptSrc, dest);
 }
 
-function enablePlayerDebugMode () {
+function enablePlayerDebugMode() {
   // enable unsigned extensions for CEP 4 5 6 and 7
   execSync(
     `
@@ -86,10 +87,10 @@ function enablePlayerDebugMode () {
     defaults write com.adobe.CSXS.5 PlayerDebugMode 1;
     defaults write com.adobe.CSXS.4 PlayerDebugMode 1;
   `
-  )
+  );
 }
 
-function disablePlayerDebugMode () {
+function disablePlayerDebugMode() {
   // enable unsigned extensions for CEP 4 5 6 and 7
   execSync(
     `
@@ -98,45 +99,44 @@ function disablePlayerDebugMode () {
     defaults write com.adobe.CSXS.5 PlayerDebugMode 0;
     defaults write com.adobe.CSXS.4 PlayerDebugMode 0;
   `
-  )
+  );
 }
 
-function tailLogs () {
-  const { NAME } = getSettings()
+function tailLogs() {
+  const { NAME } = getSettings();
   // tail the Adobe After Effects extension log files
   const files = [
     '/Library/Logs/CSXS/CEP6-AEFT.log',
     `/Library/Logs/CSXS/CEPHtmlEngine6-AEFT-14.0-${NAME}-renderer.log`,
-    `/Library/Logs/CSXS/CEPHtmlEngine6-AEFT-14.0-${NAME}.log`
-  ]
+    `/Library/Logs/CSXS/CEPHtmlEngine6-AEFT-14.0-${NAME}.log`,
+  ];
   files.forEach(file =>
     spawn('tail', ['-f', path.join(process.env.HOME, file)], {
       end: process.env,
-      stdio: 'inherit'
-    })
-  )
+      stdio: 'inherit',
+    }));
 }
 
-function openChromeRemoteDebugger () {
+function openChromeRemoteDebugger() {
   // open the debugger page in chrome
   spawn('open', ['-a', 'Google Chrome', 'http://localhost:3001'], {
     end: process.env,
-    stdio: 'inherit'
-  })
+    stdio: 'inherit',
+  });
 }
 
-function writeExtensionTemplates (env, { port } = {}) {
-  const { NAME, VERSION, BUNDLE_ID, HOST_IDS, HOST_VERSIONS } = getSettings()
+function writeExtensionTemplates(env, { port } = {}) {
+  const { NAME, VERSION, BUNDLE_ID, HOST_IDS, HOST_VERSIONS } = getSettings();
   // make sure the CSXS folder exists
-  if (!fs.existsSync(paths.appBuild)) fs.mkdirSync(paths.appBuild)
+  if (!fs.existsSync(paths.appBuild)) fs.mkdirSync(paths.appBuild);
   if (!fs.existsSync(path.join(paths.appBuild, 'CSXS'))) {
-    fs.mkdirSync(path.join(paths.appBuild, 'CSXS'))
+    fs.mkdirSync(path.join(paths.appBuild, 'CSXS'));
   }
 
   if (env === 'dev') {
     // write .debug file
-    const debugContents = debugTemplate(BUNDLE_ID, HOST_IDS)
-    fs.writeFileSync(path.join(paths.appBuild, '.debug'), debugContents)
+    const debugContents = debugTemplate(BUNDLE_ID, HOST_IDS);
+    fs.writeFileSync(path.join(paths.appBuild, '.debug'), debugContents);
   }
 
   // write manifest.xml file
@@ -145,76 +145,84 @@ function writeExtensionTemplates (env, { port } = {}) {
     bundleId: BUNDLE_ID,
     bundleVersion: VERSION,
     bundleHostIds: HOST_IDS,
-    bundleHostVersions: HOST_VERSIONS
-  })
-  fs.writeFileSync(path.join(paths.appBuild, 'CSXS/manifest.xml'), manifestContents)
+    bundleHostVersions: HOST_VERSIONS,
+  });
+  fs.writeFileSync(
+    path.join(paths.appBuild, 'CSXS/manifest.xml'),
+    manifestContents
+  );
 
   // write manifest.xml file
   const panelContents = panelTemplate({
     title: NAME,
-    port
-  })
-  fs.writeFileSync(path.join(paths.appBuild, 'index.html'), panelContents)
+    port,
+  });
+  fs.writeFileSync(path.join(paths.appBuild, 'index.html'), panelContents);
 }
 
-function getSymlinkExtensionPath () {
-  const { BUNDLE_ID } = getSettings()
-  const CEP_EXTENSIONS_PATH = '/Library/Application\ Support/Adobe/CEP/extensions'
-  return path.join(process.env.HOME, CEP_EXTENSIONS_PATH, BUNDLE_ID)
+function getExtenstionPath() {
+  return '/Library/Application\ Support/Adobe/CEP/extensions';
 }
 
-function symlinkExtension () {
-  let target = getSymlinkExtensionPath()
-  del.sync(target, { force: true })
-  fs.symlinkSync(paths.appBuild, target)
+function getSymlinkExtensionPath() {
+  const { BUNDLE_ID } = getSettings();
+  const extensionPath = getExtenstionPath();
+  return path.join(process.env.HOME, extensionPath, BUNDLE_ID);
 }
 
-function printCEPExtensionLocation () {
-  console.log(`Extension location: ${chalk.blue(getSymlinkExtensionPath())}`)
+function symlinkExtension() {
+  fs.ensureDirSync(getExtenstionPath());
+  let target = getSymlinkExtensionPath();
+  del.sync(target, { force: true });
+  fs.symlinkSync(paths.appBuild, target);
 }
 
-function printCEPLogLocation () {
-  let logLocation
+function printCEPExtensionLocation() {
+  console.log(`Extension location: ${chalk.blue(getSymlinkExtensionPath())}`);
+}
+
+function printCEPLogLocation() {
+  let logLocation;
   if (process.platform === 'win32') {
-    logLocation = path.join(process.env.HOME, 'AppData\Local\Temp')
+    logLocation = path.join(process.env.HOME, 'AppData\Local\Temp');
   } else {
-    logLocation = path.join(process.env.HOME, 'Library/Logs/CSXS')
+    logLocation = path.join(process.env.HOME, 'Library/Logs/CSXS');
   }
-  console.log(`Logs location: ${chalk.blue(logLocation)}`)
+  console.log(`Logs location: ${chalk.blue(logLocation)}`);
 }
 
-function printLocationInApplication () {
-  const { NAME } = getSettings()
+function printLocationInApplication() {
+  const { NAME } = getSettings();
   console.log(
     `Location in Adobe CC: ${chalk.blue('Window')} > ${chalk.blue('Extensions')} > ${chalk.blue(NAME)}`
-  )
+  );
 }
 
-function compile ({ port }) {
-  createBuildFolder()
-  copyPublicFolder()
-  enablePlayerDebugMode()
-  writeExtensionTemplates('dev', { port })
-  symlinkExtendscriptFolder()
-  symlinkExtension()
+function compile({ port }) {
+  createBuildFolder();
+  copyPublicFolder();
+  enablePlayerDebugMode();
+  writeExtensionTemplates('dev', { port });
+  symlinkExtendscriptFolder();
+  symlinkExtension();
 }
 
-function compileMessages () {
-  printCEPLogLocation()
-  printCEPExtensionLocation()
-  printLocationInApplication()
+function compileMessages() {
+  printCEPLogLocation();
+  printCEPExtensionLocation();
+  printLocationInApplication();
 }
 
-function build () {
-  createBuildFolder()
-  writeExtensionTemplates('prod')
-  copyExtendscriptFolder()
+function build() {
+  createBuildFolder();
+  writeExtensionTemplates('prod');
+  copyExtendscriptFolder();
 }
 
-function buildMessages () {
-  printCEPLogLocation()
-  printCEPExtensionLocation()
-  printLocationInApplication()
+function buildMessages() {
+  printCEPLogLocation();
+  printCEPExtensionLocation();
+  printLocationInApplication();
 }
 
 module.exports = {
@@ -232,5 +240,5 @@ module.exports = {
   createBuildFolder,
   compileMessages,
   buildMessages,
-  getSettings
-}
+  getSettings,
+};
