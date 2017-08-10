@@ -13,14 +13,15 @@ require('dotenv').config({ silent: true });
 var paths = require('../config/paths');
 
 function getSettings() {
-  const packageJSON = require('../package.json');
+  const packageJSONPath = path.join(paths.appPath, 'package.json');
+  const packageJSON = require(packageJSONPath);
   const VERSION = packageJSON.version.split('-')[0]; // because ae doesnt load extensions that arent in the exact format '1.0.0'
 
   return {
     NAME: process.env.NAME || 'My CEP Extension',
     VERSION: VERSION || '1.0.0',
     BUNDLE_ID: process.env.BUNDLE_ID || 'my.cep.extension',
-    BUNDLE_VERSION: process.env.BUNDLE_VERSION || '1.0.0',
+    BUNDLE_VERSION: process.env.BUNDLE_VERSION || VERSION || '1.0.0',
     CEP_VERSION: process.env.CEP_VERSION || '',
     PANEL_WIDTH: process.env.PANEL_WIDTH || '',
     PANEL_HEIGHT: process.env.PANEL_HEIGHT || '',
@@ -126,7 +127,14 @@ function openChromeRemoteDebugger() {
 }
 
 function writeExtensionTemplates(env, { port } = {}) {
-  const { NAME, VERSION, BUNDLE_ID, HOST_IDS, HOST_VERSIONS } = getSettings();
+  const {
+    NAME,
+    VERSION,
+    BUNDLE_ID,
+    BUNDLE_VERSION,
+    HOST_IDS,
+    HOST_VERSIONS,
+  } = getSettings();
   // make sure the CSXS folder exists
   if (!fs.existsSync(paths.appBuild)) fs.mkdirSync(paths.appBuild);
   if (!fs.existsSync(path.join(paths.appBuild, 'CSXS'))) {
@@ -143,7 +151,8 @@ function writeExtensionTemplates(env, { port } = {}) {
   const manifestContents = manifestTemplate({
     bundleName: NAME,
     bundleId: BUNDLE_ID,
-    bundleVersion: VERSION,
+    version: VERSION,
+    bundleVersion: BUNDLE_VERSION,
     bundleHostIds: HOST_IDS,
     bundleHostVersions: HOST_VERSIONS,
   });
