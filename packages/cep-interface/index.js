@@ -1,4 +1,4 @@
-export const SystemPath = {
+export var SystemPath = {
   USER_DATA: 'userData',
   COMMON_FILES: 'commonFiles',
   MY_DOCUMENTS: 'myDocuments',
@@ -101,7 +101,7 @@ function evalScript (script, callback) {
 }
 
 export function loadExtendscript (fileName) {
-  const extensionRoot = getSystemPath(SystemPath.EXTENSION) + '/extendscript/'
+  var extensionRoot = getSystemPath(SystemPath.EXTENSION) + '/extendscript/'
   return new Promise(function (resolve, reject) {
     evalScript('$.evalFile("' + extensionRoot + fileName + '")', function (result) {
       if (!result || result === 'undefined') return resolve()
@@ -120,7 +120,7 @@ export function evalExtendscript (code, options) {
   if (!options) options = {}
 
   return new Promise(function (resolve, reject) {
-    const doEvalScript = function () {
+    var doEvalScript = function () {
       evalScript(code, function (result) {
         if (!result || result === 'undefined') return resolve()
 
