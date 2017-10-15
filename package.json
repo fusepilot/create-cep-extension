@@ -10,7 +10,8 @@
     "publish": "tasks/release.sh",
     "start": "node packages/create-cep-extension-scripts/scripts/start.js",
     "test": "node packages/create-cep-extension-scripts/scripts/test.js --env=jsdom",
-    "format": "prettier --trailing-comma es5 --single-quote --write 'packages/*/*.js' 'packages/*/!(node_modules)/**/*.js'",
+    "format":
+      "prettier --trailing-comma es5 --single-quote --write 'packages/*/*.js' 'packages/*/!(node_modules)/**/*.js'",
     "precommit": "lint-staged"
   },
   "devDependencies": {
@@ -19,12 +20,10 @@
     "lerna": "2.0.0-rc.3",
     "lerna-changelog": "^0.2.3",
     "lint-staged": "^3.3.1",
-    "prettier": "^0.21.0"
+    "prettier": "1.6.1"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --trailing-comma es5 --single-quote --write",
-      "git add"
-    ]
+    "*.js": ["prettier --trailing-comma es5 --single-quote --write", "git add"],
+    "yarn.lock": ["git rm --cached"]
   }
 }

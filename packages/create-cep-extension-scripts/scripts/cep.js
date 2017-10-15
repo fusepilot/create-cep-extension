@@ -31,8 +31,8 @@ function getSettings() {
     TAIL_LOGS: process.env.TAIL_LOGS || '',
     HOST_IDS: process.env.HOST_IDS,
     HOST_VERSIONS: process.env.HOST_VERSIONS,
-    CERTIFICATE_PASSWORD: process.env.CERTIFICATE_PASSWORD ||
-      'certificate-password',
+    CERTIFICATE_PASSWORD:
+      process.env.CERTIFICATE_PASSWORD || 'certificate-password',
     CERTIFICATE_FILENAME: process.env.CERTIFICATE_FILENAME || 'certificate.p12',
     CERTIFICATE_COUNTRY: process.env.CERTIFICATE_COUNTRY || 'US',
     CERTIFICATE_PROVINCE: process.env.CERTIFICATE_PROVINCE || 'CA',
@@ -115,7 +115,8 @@ function tailLogs() {
     spawn('tail', ['-f', path.join(process.env.HOME, file)], {
       end: process.env,
       stdio: 'inherit',
-    }));
+    })
+  );
 }
 
 function openChromeRemoteDebugger() {
@@ -170,7 +171,7 @@ function writeExtensionTemplates(env, { port } = {}) {
 }
 
 function getExtenstionPath() {
-  return '/Library/Application\ Support/Adobe/CEP/extensions';
+  return '/Library/Application Support/Adobe/CEP/extensions';
 }
 
 function getSymlinkExtensionPath() {
@@ -193,7 +194,7 @@ function printCEPExtensionLocation() {
 function printCEPLogLocation() {
   let logLocation;
   if (process.platform === 'win32') {
-    logLocation = path.join(process.env.HOME, 'AppData\Local\Temp');
+    logLocation = path.join(process.env.HOME, 'AppDataLocalTemp');
   } else {
     logLocation = path.join(process.env.HOME, 'Library/Logs/CSXS');
   }
@@ -203,7 +204,9 @@ function printCEPLogLocation() {
 function printLocationInApplication() {
   const { NAME } = getSettings();
   console.log(
-    `Location in Adobe CC: ${chalk.blue('Window')} > ${chalk.blue('Extensions')} > ${chalk.blue(NAME)}`
+    `Location in Adobe CC: ${chalk.blue('Window')} > ${chalk.blue(
+      'Extensions'
+    )} > ${chalk.blue(NAME)}`
   );
 }
 
@@ -217,9 +220,11 @@ function compile({ port }) {
 }
 
 function compileMessages() {
+  console.log();
   printCEPLogLocation();
   printCEPExtensionLocation();
   printLocationInApplication();
+  console.log();
 }
 
 function build() {
@@ -229,9 +234,15 @@ function build() {
 }
 
 function buildMessages() {
+  console.log();
   printCEPLogLocation();
   printCEPExtensionLocation();
   printLocationInApplication();
+  console.log();
+  console.log(
+    `To create a ZXP archive, use ${chalk.cyan('yarn run archive')}.`
+  );
+  console.log();
 }
 
 module.exports = {

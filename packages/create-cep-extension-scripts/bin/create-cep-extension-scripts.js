@@ -8,11 +8,11 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-'use strict'
+'use strict';
 
-var spawn = require('cross-spawn')
-var script = process.argv[2]
-var args = process.argv.slice(3)
+var spawn = require('cross-spawn');
+var script = process.argv[2];
+var args = process.argv.slice(3);
 
 switch (script) {
   case 'archive':
@@ -20,32 +20,37 @@ switch (script) {
   case 'eject':
   case 'start':
   case 'test':
-    var result = spawn.sync('node', [require.resolve('../scripts/' + script)].concat(args), {
-      stdio: 'inherit'
-    })
+    var result = spawn.sync(
+      'node',
+      [require.resolve('../scripts/' + script)].concat(args),
+      {
+        stdio: 'inherit',
+      }
+    );
+    console.log(script);
     if (result.signal) {
       if (result.signal === 'SIGKILL') {
         console.log(
           'The build failed because the process exited too early. ' +
             'This probably means the system ran out of memory or someone called ' +
             '`kill -9` on the process.'
-        )
+        );
       } else if (result.signal === 'SIGTERM') {
         console.log(
           'The build failed because the process exited too early. ' +
             'Someone might have called `kill` or `killall`, or the system could ' +
             'be shutting down.'
-        )
+        );
       }
-      process.exit(1)
+      process.exit(1);
     }
-    process.exit(result.status)
-    break
+    process.exit(result.status);
+    break;
   default:
-    console.log('Unknown script "' + script + '".')
-    console.log('Perhaps you need to update create-cep-extension-scripts?')
+    console.log('Unknown script "' + script + '".');
+    console.log('Perhaps you need to update create-cep-extension-scripts?');
     console.log(
       'See: https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md#updating-to-new-releases'
-    )
-    break
+    );
+    break;
 }
