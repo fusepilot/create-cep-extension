@@ -7,15 +7,13 @@
     "postinstall": "lerna bootstrap",
     "publish": "tasks/release.sh",
     "format":
-      "prettier --trailing-comma es5 --single-quote --write 'packages/*/*.js' 'packages/*/!(node_modules)/**/*.js'",
-    "precommit": "lint-staged"
+      "prettier --trailing-comma es5 --single-quote --write 'packages/*/*.js' 'packages/*/!(node_modules)/**/*.js'"
   },
   "devDependencies": {
     "eslint": "3.16.1",
     "husky": "^0.13.2",
     "lerna": "2.0.0-rc.3",
     "lerna-changelog": "^0.2.3",
-    "lint-staged": "^3.3.1",
     "prettier": "1.6.1"
   },
   "lint-staged": {
