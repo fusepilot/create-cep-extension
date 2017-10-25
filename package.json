@@ -1,15 +1,11 @@
 {
   "private": true,
   "scripts": {
-    "build": "node packages/create-cep-extension-scripts/scripts/build.js",
-    "archive": "node packages/create-cep-extension-scripts/scripts/archive.js",
     "changelog": "lerna-changelog",
     "create-react-app": "tasks/cra.sh",
     "e2e": "tasks/e2e-simple.sh",
     "postinstall": "lerna bootstrap",
     "publish": "tasks/release.sh",
-    "start": "node packages/create-cep-extension-scripts/scripts/start.js",
-    "test": "node packages/create-cep-extension-scripts/scripts/test.js --env=jsdom",
     "format":
       "prettier --trailing-comma es5 --single-quote --write 'packages/*/*.js' 'packages/*/!(node_modules)/**/*.js'",
     "precommit": "lint-staged"
