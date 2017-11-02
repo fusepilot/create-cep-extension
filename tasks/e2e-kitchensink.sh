@@ -43,7 +43,7 @@ function handle_exit {
 }
 
 function create_react_app {
-  node "$temp_cli_path"/node_modules/create-react-app/index.js "$@"
+  node "$temp_cli_path"/node_modules/create-cep-extension/index.js "$@"
 }
 
 # Check for the existence of one or more files.
@@ -76,11 +76,11 @@ then
 fi
 
 # ******************************************************************************
-# First, pack create-cep-extension-scripts and create-react-app so we can use them.
+# First, pack create-cep-extension-scripts and create-cep-extension so we can use them.
 # ******************************************************************************
 
 # Pack CLI
-cd "$root_path"/packages/create-react-app
+cd "$root_path"/packages/create-cep-extension
 cli_path=$PWD/`npm pack`
 
 # Go to create-cep-extension-scripts
@@ -117,7 +117,7 @@ cd "$temp_module_path"
 npm install test-integrity@^2.0.1
 
 # ******************************************************************************
-# Now that we used create-react-app to create an app depending on create-cep-extension-scripts,
+# Now that we used create-cep-extension to create an app depending on create-cep-extension-scripts,
 # let's make sure all npm scripts are in the working state.
 # ******************************************************************************
 

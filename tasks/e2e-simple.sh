@@ -42,7 +42,7 @@ function handle_exit {
 }
 
 function create_react_app {
-  node "$temp_cli_path"/node_modules/create-react-app/index.js "$@"
+  node "$temp_cli_path"/node_modules/create-cep-extension/index.js "$@"
 }
 
 # Check for the existence of one or more files.
@@ -71,8 +71,8 @@ grep -v "lerna bootstrap" package.json > temp && mv temp package.json
 npm install
 mv package.json.bak package.json
 
-# We need to install create-react-app deps to test it
-cd "$root_path"/packages/create-react-app
+# We need to install create-cep-extension deps to test it
+cd "$root_path"/packages/create-cep-extension
 npm install
 cd "$root_path"
 
@@ -80,7 +80,7 @@ cd "$root_path"
 if [[ `node --version | sed -e 's/^v//' -e 's/\..*//g'` -lt 4 ]]
 then
   cd $temp_app_path
-  err_output=`node "$root_path"/packages/create-react-app/index.js test-node-version 2>&1 > /dev/null || echo ''`
+  err_output=`node "$root_path"/packages/create-cep-extension/index.js test-node-version 2>&1 > /dev/null || echo ''`
   [[ $err_output =~ You\ are\ running\ Node ]] && exit 0 || exit 1
 fi
 
@@ -100,7 +100,7 @@ fi
 ./node_modules/.bin/eslint --max-warnings 0 .
 
 # ******************************************************************************
-# First, test the create-react-app development environment.
+# First, test the create-cep-extension development environment.
 # This does not affect our users but makes sure we can develop it.
 # ******************************************************************************
 
@@ -122,11 +122,11 @@ CI=true npm test
 npm start -- --smoke-test
 
 # ******************************************************************************
-# Next, pack create-cep-extension-scripts and create-react-app so we can verify they work.
+# Next, pack create-cep-extension-scripts and create-cep-extension so we can verify they work.
 # ******************************************************************************
 
 # Pack CLI
-cd "$root_path"/packages/create-react-app
+cd "$root_path"/packages/create-cep-extension
 cli_path=$PWD/`npm pack`
 
 # Go to create-cep-extension-scripts
@@ -165,7 +165,7 @@ cd $temp_app_path
 create_react_app --scripts-version="$scripts_path" test-app
 
 # ******************************************************************************
-# Now that we used create-react-app to create an app depending on create-cep-extension-scripts,
+# Now that we used create-cep-extension to create an app depending on create-cep-extension-scripts,
 # let's make sure all npm scripts are in the working state.
 # ******************************************************************************
 
