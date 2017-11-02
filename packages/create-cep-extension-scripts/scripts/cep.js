@@ -77,9 +77,17 @@ function symlinkExtendscriptFolder() {
 }
 
 function enablePlayerDebugMode() {
-  // enable unsigned extensions for CEP 4 5 6 and 7
+  // enable unsigned extensions for the foreseable future
   execSync(
     `
+    defaults write com.adobe.CSXS.15 PlayerDebugMode 1;
+    defaults write com.adobe.CSXS.14 PlayerDebugMode 1;
+    defaults write com.adobe.CSXS.13 PlayerDebugMode 1;
+    defaults write com.adobe.CSXS.12 PlayerDebugMode 1;
+    defaults write com.adobe.CSXS.11 PlayerDebugMode 1;
+    defaults write com.adobe.CSXS.10 PlayerDebugMode 1;
+    defaults write com.adobe.CSXS.9 PlayerDebugMode 1;
+    defaults write com.adobe.CSXS.8 PlayerDebugMode 1;
     defaults write com.adobe.CSXS.7 PlayerDebugMode 1;
     defaults write com.adobe.CSXS.6 PlayerDebugMode 1;
     defaults write com.adobe.CSXS.5 PlayerDebugMode 1;
@@ -89,9 +97,17 @@ function enablePlayerDebugMode() {
 }
 
 function disablePlayerDebugMode() {
-  // enable unsigned extensions for CEP 4 5 6 and 7
+  // disable unsigned extensions for the foreseable future
   execSync(
     `
+    defaults write com.adobe.CSXS.15 PlayerDebugMode 0;
+    defaults write com.adobe.CSXS.14 PlayerDebugMode 0;
+    defaults write com.adobe.CSXS.13 PlayerDebugMode 0;
+    defaults write com.adobe.CSXS.12 PlayerDebugMode 0;
+    defaults write com.adobe.CSXS.11 PlayerDebugMode 0;
+    defaults write com.adobe.CSXS.10 PlayerDebugMode 0;
+    defaults write com.adobe.CSXS.9 PlayerDebugMode 0;
+    defaults write com.adobe.CSXS.8 PlayerDebugMode 0;
     defaults write com.adobe.CSXS.7 PlayerDebugMode 0;
     defaults write com.adobe.CSXS.6 PlayerDebugMode 0;
     defaults write com.adobe.CSXS.5 PlayerDebugMode 0;
