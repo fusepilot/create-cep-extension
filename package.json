@@ -14,10 +14,15 @@
     "husky": "^0.13.2",
     "lerna": "2.0.0-rc.3",
     "lerna-changelog": "^0.2.3",
-    "prettier": "1.6.1"
+    "prettier": "^1.7.4"
   },
   "lint-staged": {
     "*.js": ["prettier --trailing-comma es5 --single-quote --write", "git add"],
     "yarn.lock": ["git rm --cached"]
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
   }
 }
