@@ -1,13 +1,10 @@
 const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
-const webpack = require('webpack');
 const { execSync, spawn } = require('child_process');
-const del = require('del');
 const debugTemplate = require('./templates/.debug');
 const manifestTemplate = require('./templates/manifest');
 const panelTemplate = require('./templates/panel');
-const uglifyJS = require('uglify-js');
 require('dotenv').config({ silent: true });
 
 var paths = require('../config/paths');
@@ -183,7 +180,7 @@ function getSymlinkExtensionPath() {
 function symlinkExtension() {
   fs.ensureDirSync(getExtenstionPath());
   let target = getSymlinkExtensionPath();
-  del.sync(target, { force: true });
+  fs.removeSync(target);
   fs.symlinkSync(paths.appBuild, target);
 }
 
