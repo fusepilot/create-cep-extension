@@ -1,4 +1,4 @@
-module.exports = function ({ title = 'CEP Panel', port = 3000 }) {
+module.exports = function({ title = 'CEP Panel', port = 3000 }) {
   return `<!DOCTYPE html>
 <html>
   <head>
@@ -9,5 +9,5 @@ module.exports = function ({ title = 'CEP Panel', port = 3000 }) {
       window.location.href = "http://localhost:${port}";
     </script>
   </body>
-</html>`
-}
+</html>`;
+};

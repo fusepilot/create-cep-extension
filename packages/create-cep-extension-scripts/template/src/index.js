@@ -1,12 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
-import './index.css'
-import { inCEPEnvironment, evalExtendscript } from 'cep-interface'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import './index.css';
+import { inCEPEnvironment, evalExtendscript } from 'cep-interface';
 
 if (inCEPEnvironment()) {
   // write "Hello World!" to the info panel inside the host application
-  evalExtendscript('writeLn("Hello World!");')
+  evalExtendscript('writeLn("Hello World!");');
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<App />, document.getElementById('root'));

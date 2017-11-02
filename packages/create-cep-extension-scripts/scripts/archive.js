@@ -28,7 +28,9 @@ function preArchiveCheck() {
   if (!fs.existsSync(paths.appBuild)) {
     console.log();
     console.log(
-      `${chalk.red('No build directory found to archive.')} Run ${chalk.blue('yarn run build')} first and then try again.`
+      `${chalk.red('No build directory found to archive.')} Run ${chalk.blue(
+        'yarn run build'
+      )} first and then try again.`
     );
     console.log();
     process.exit(1);
@@ -135,8 +137,7 @@ function sign() {
         password: CERTIFICATE_PASSWORD,
       },
       (error, result) => {
-        if (error)
-          reject(error);
+        if (error) reject(error);
         else {
           resolve({
             result,

@@ -36,11 +36,11 @@
 //   /!\ DO NOT MODIFY THIS FILE /!\
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-'use strict'
+'use strict';
 
-var chalk = require('chalk')
+var chalk = require('chalk');
 
-var currentNodeVersion = process.versions.node
+var currentNodeVersion = process.versions.node;
 if (currentNodeVersion.split('.')[0] < 4) {
   console.error(
     chalk.red(
@@ -50,10 +50,10 @@ if (currentNodeVersion.split('.')[0] < 4) {
         'Create CEP Extension requires Node 4 or higher. \n' +
         'Please update your version of Node.'
     )
-  )
-  process.exit(1)
+  );
+  process.exit(1);
 }
 
-console.log(__dirname)
+console.log(__dirname);
 
-require('./createCEPExtension')
+require('./createCEPExtension');

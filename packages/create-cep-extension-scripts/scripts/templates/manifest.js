@@ -1,22 +1,20 @@
-module.exports = function(
-  {
-    bundleName = 'My Extension',
-    bundleId = 'com.test.test.extension',
-    version = '1.0.0',
-    bundleHostIds = 'PHXS, PHSP, IDSN, AICY, ILST, PPRO, AEFT, PRLD, FLPR, DRWV',
-    bundleHostVersions = '[0.0,99.9]',
-    bundleVersion = '1.0.0',
-    cepVersion = '6.0',
-    width = '500',
-    height = '500',
-    cefParams = [
-      '--allow-file-access-from-files',
-      '--allow-file-access',
-      '--enable-nodejs',
-      '--mixed-context',
-    ],
-  }
-) {
+module.exports = function({
+  bundleName = 'My Extension',
+  bundleId = 'com.test.test.extension',
+  version = '1.0.0',
+  bundleHostIds = 'PHXS, PHSP, IDSN, AICY, ILST, PPRO, AEFT, PRLD, FLPR, DRWV',
+  bundleHostVersions = '[0.0,99.9]',
+  bundleVersion = '1.0.0',
+  cepVersion = '6.0',
+  width = '500',
+  height = '500',
+  cefParams = [
+    '--allow-file-access-from-files',
+    '--allow-file-access',
+    '--enable-nodejs',
+    '--mixed-context',
+  ],
+}) {
   var commandLineParams = cefParams.map(
     cefParam => `<Parameter>${cefParam}</Parameter>`
   );
