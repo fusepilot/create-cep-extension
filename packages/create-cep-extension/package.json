@@ -1,7 +1,9 @@
 {
   "name": "create-cep-extension",
-  "version": "1.0.0-beta.13",
-  "keywords": ["react"],
+  "version": "1.0.0-beta.14",
+  "keywords": [
+    "react"
+  ],
   "author": "Michael Delaney",
   "description": "Create CEP Extensions with no build configuration.",
   "repository": "fusepilot/create-cep-extension",
@@ -12,7 +14,10 @@
   "bugs": {
     "url": "https://github.com/fusepilot/create-cep-extension/issues"
   },
-  "files": ["index.js", "createCEPExtension.js"],
+  "files": [
+    "index.js",
+    "createCEPExtension.js"
+  ],
   "bin": {
     "create-cep-extension": "./index.js"
   },

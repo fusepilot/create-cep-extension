@@ -1,9 +1,8 @@
 {
   "name": "cep-interface",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "author": "Michael Delaney",
-  "description":
-    "Methods to communicate between CEP panels and their host environments.",
+  "description": "Methods to communicate between CEP panels and their host environments.",
   "main": "index.js",
   "repository": "fusepilot/create-cep-extension",
   "license": "MIT",
@@ -13,5 +12,7 @@
   "bugs": {
     "url": "https://github.com/fusepilot/create-cep-extension/issues"
   },
-  "files": ["index.js"]
+  "files": [
+    "index.js"
+  ]
 }
