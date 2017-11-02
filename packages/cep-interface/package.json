@@ -1,6 +1,6 @@
 {
   "name": "cep-interface",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "author": "Michael Delaney",
   "description": "Methods to communicate between CEP panels and their host environments.",
   "main": "index.js",
