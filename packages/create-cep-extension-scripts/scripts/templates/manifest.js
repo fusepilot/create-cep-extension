@@ -2,8 +2,7 @@ module.exports = function({
   bundleName = 'My Extension',
   bundleId = 'com.test.test.extension',
   version = '1.0.0',
-  bundleHostIds = 'PHXS, PHSP, IDSN, AICY, ILST, PPRO, AEFT, PRLD, FLPR, DRWV',
-  bundleHostVersions = '[0.0,99.9]',
+  hosts,
   bundleVersion = '1.0.0',
   cepVersion = '6.0',
   width = '500',
@@ -18,12 +17,6 @@ module.exports = function({
   var commandLineParams = cefParams.map(
     cefParam => `<Parameter>${cefParam}</Parameter>`
   );
-  var hosts = bundleHostIds
-    .split(',')
-    .map(
-      bundleHostId =>
-        `<Host Name="${bundleHostId.trim()}" Version="${bundleHostVersions}" />`
-    );
 
   return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ExtensionManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ExtensionBundleId="${bundleId}" ExtensionBundleName="${bundleName}" ExtensionBundleVersion="${bundleVersion}" Version="${cepVersion}">
@@ -32,7 +25,9 @@ module.exports = function({
   </ExtensionList>
   <ExecutionEnvironment>
     <HostList>
-      ${hosts.join('\n      ')}
+      ${hosts
+        .map(host => `<Host Name="${host.name}" Version="${host.version}" />`)
+        .join('\n      ')}
     </HostList>
     <LocaleList>
       <Locale Code="All"/>
