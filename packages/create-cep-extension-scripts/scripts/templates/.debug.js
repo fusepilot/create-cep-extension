@@ -1,16 +1,12 @@
-module.exports = function(
-  bundleId = 'com.test.test.extension',
-  hostNames = 'PHXS, PHSP, IDSN, AICY, ILST, PPRO, AEFT, PRLD, FLPR, DRWV'
-) {
+module.exports = function(bundleId = 'com.test.extension', hosts) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <ExtensionList>
   <Extension Id="${bundleId}">
   <HostList>
-    ${hostNames
-      .split(',')
+    ${hosts
       .map(
-        (hostName, i) =>
-          `<Host Name="${hostName.trim()}" Port="${'' + (3000 + i + 1)}" />`
+        (host, i) =>
+          `<Host Name="${host.name.trim()}" Port="${'' + (3000 + i + 1)}" />`
       )
       .join('\n    ')}
   </HostList>

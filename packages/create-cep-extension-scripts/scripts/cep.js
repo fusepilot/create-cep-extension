@@ -26,8 +26,9 @@ function getSettings() {
     AUTO_OPEN_REMOTE_DEBUGGER: process.env.AUTO_OPEN_REMOTE_DEBUGGER || '',
     ENABLE_PLAYERDEBUGMODE: process.env.ENABLE_PLAYERDEBUGMODE || '',
     TAIL_LOGS: process.env.TAIL_LOGS || '',
-    HOST_IDS: process.env.HOST_IDS,
-    HOST_VERSIONS: process.env.HOST_VERSIONS,
+    HOSTS:
+      process.env.HOSTS ||
+      'PHXS, PHSP, IDSN, AICY, ILST, PPRO, AEFT, PRLD, FLPR, DRWV',
     CERTIFICATE_PASSWORD:
       process.env.CERTIFICATE_PASSWORD || 'certificate-password',
     CERTIFICATE_FILENAME: process.env.CERTIFICATE_FILENAME || 'certificate.p12',
@@ -141,23 +142,34 @@ function openChromeRemoteDebugger() {
 }
 
 function writeExtensionTemplates(env, { port } = {}) {
-  const {
-    NAME,
-    VERSION,
-    BUNDLE_ID,
-    BUNDLE_VERSION,
-    HOST_IDS,
-    HOST_VERSIONS,
-  } = getSettings();
+  const { NAME, VERSION, BUNDLE_ID, BUNDLE_VERSION, HOSTS } = getSettings();
+
   // make sure the CSXS folder exists
   if (!fs.existsSync(paths.appBuild)) fs.mkdirSync(paths.appBuild);
   if (!fs.existsSync(path.join(paths.appBuild, 'CSXS'))) {
     fs.mkdirSync(path.join(paths.appBuild, 'CSXS'));
   }
 
+  const hosts = HOSTS.split(/(?![^)(]*\([^)(]*?\)\)),(?![^\[]*\])/)
+    .map(host => host.trim())
+    .map(host => {
+      let [name, version] = host.split('@');
+
+      if (version == '*' || !version) {
+        version = '[0.0,99.9]';
+      } else if (version) {
+        version = version;
+      }
+
+      return {
+        name,
+        version,
+      };
+    });
+
   if (env === 'dev') {
     // write .debug file
-    const debugContents = debugTemplate(BUNDLE_ID, HOST_IDS);
+    const debugContents = debugTemplate(BUNDLE_ID, hosts);
     fs.writeFileSync(path.join(paths.appBuild, '.debug'), debugContents);
   }
 
@@ -166,9 +178,8 @@ function writeExtensionTemplates(env, { port } = {}) {
     bundleName: NAME,
     bundleId: BUNDLE_ID,
     version: VERSION,
+    hosts,
     bundleVersion: BUNDLE_VERSION,
-    bundleHostIds: HOST_IDS,
-    bundleHostVersions: HOST_VERSIONS,
   });
   fs.writeFileSync(
     path.join(paths.appBuild, 'CSXS/manifest.xml'),

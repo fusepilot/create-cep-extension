@@ -125,15 +125,23 @@ NAME="My Extension"
 BUNDLE_ID="com.mycompany.myextension"
 ````
 
-### Target Hosts
+### Hosts
 
-By default, the extension will target all known Adobe hosts. To target specific hosts, add a `EXTENSION_HOST_IDS` variable to your `.env` with a comma delimited list of the host id's you want to target.
+By default, the extension will target all known Adobe hosts. To target specific hosts, uncomment the `HOSTS` variable to `.env` and modify the list of the hosts you want to target.
 
-For example, to target just In Design and After Effects, you would add this to your `.env` file:
+For example, to target just Illustrator and After Effects, you would add this to your `.env` file:
 
 ````bash
-HOST_IDS="IDSN, AEFT"
+HOSTS="ILST, AEFT"
 ````
+
+And to target specific versions:
+
+````bash
+HOSTS="ILST, IDSN@*, PHXS@6.0, AEFT@[5.0,10.0]"
+````
+
+This will target all versions of Illustrator and In Design, Photoshop 6.0, and After Effects 5.0 - 10.0.
 
 ### Cerificate Variables
 
