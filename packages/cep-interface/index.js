@@ -82,9 +82,50 @@ export function getWindowTitle() {
   return window.__adobe_cep__.invokeSync('getWindowTitle', '');
 }
 
+export function getOSInformation() {
+  var userAgent = navigator.userAgent;
+
+  if (navigator.platform == 'Win32' || navigator.platform == 'Windows') {
+    var winVersion = 'Windows platform';
+    if (userAgent.indexOf('Windows NT 5.0') > -1) {
+      winVersion = 'Windows 2000';
+    } else if (userAgent.indexOf('Windows NT 5.1') > -1) {
+      winVersion = 'Windows XP';
+    } else if (userAgent.indexOf('Windows NT 5.2') > -1) {
+      winVersion = 'Windows Server 2003';
+    } else if (userAgent.indexOf('Windows NT 6.0') > -1) {
+      winVersion = 'Windows Vista';
+    } else if (userAgent.indexOf('Windows NT 6.1') > -1) {
+      winVersion = 'Windows 7';
+    } else if (userAgent.indexOf('Windows NT 6.2') > -1) {
+      winVersion = 'Windows 8';
+    }
+
+    var winBit = '32-bit';
+    if (userAgent.indexOf('WOW64') > -1) {
+      winBit = '64-bit';
+    }
+
+    return winVersion + ' ' + winBit;
+  } else if (
+    navigator.platform == 'MacIntel' ||
+    navigator.platform == 'Macintosh'
+  ) {
+    var agentStr = new String();
+    agentStr = userAgent;
+    var verLength = agentStr.indexOf(')') - agentStr.indexOf('Mac OS X');
+    var verStr = agentStr.substr(agentStr.indexOf('Mac OS X'), verLength);
+    var result = verStr.replace('_', '.');
+    result = result.replace('_', '.');
+    return result;
+  }
+
+  return 'Unknown Operation System';
+}
+
 export function getSystemPath(pathType) {
   var path = decodeURI(window.__adobe_cep__.getSystemPath(pathType));
-  var OSVersion = this.getOSInformation();
+  var OSVersion = getOSInformation();
   if (OSVersion.indexOf('Windows') >= 0) {
     path = path.replace('file:///', '');
   } else if (OSVersion.indexOf('Mac') >= 0) {
