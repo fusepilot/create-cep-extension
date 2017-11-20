@@ -3,7 +3,8 @@
   "scripts": {
     "changelog": "lerna-changelog",
     "create-cep-extension": "tasks/cra.sh",
-    "test": "yarn run create-cep-extension my-app && cd my-app && yarn start",
+    "test":
+      "rm -rf my-app && yarn run create-cep-extension my-app && cd my-app && yarn start",
     "e2e": "tasks/e2e-simple.sh",
     "postinstall": "lerna bootstrap",
     "publish": "tasks/release.sh",
