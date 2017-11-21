@@ -253,6 +253,7 @@ function compileMessages() {
 
 function build() {
   createBuildFolder();
+  copyPublicFolder();
   writeExtensionTemplates('prod');
   copyExtendscriptFolder();
 }
