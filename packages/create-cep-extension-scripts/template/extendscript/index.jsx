@@ -1,3 +1,3 @@
 ﻿(function() {
-  writeLn('Hello World');
+  $.writeln('Hello World');
 })();

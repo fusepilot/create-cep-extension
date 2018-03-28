@@ -6,7 +6,7 @@ import { inCEPEnvironment, evalExtendscript } from 'cep-interface';
 
 if (inCEPEnvironment()) {
   // write "Hello World!" to the info panel inside the host application
-  evalExtendscript('writeLn("Hello World!");');
+  evalExtendscript('$.writeln("Hello World!");');
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
