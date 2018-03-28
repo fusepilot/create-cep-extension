@@ -107,7 +107,9 @@ function certificate() {
 
 function fixZXPPermissions() {
   return new Promise((resolve, reject) => {
-    execSync(`chmod +x ${require('zxp-provider').osx}`);
+    if (process.platform !== 'win32') {
+      execSync(`chmod +x ${require('zxp-provider').osx}`);
+    }
     resolve();
   });
 }
@@ -115,7 +117,7 @@ function fixZXPPermissions() {
 function getOutputFilename() {
   const { NAME, VERSION } = cep.getSettings();
 
-  return `"${NAME}-${VERSION}.zxp"`;
+  return `${NAME}-${VERSION}.zxp`.replace(/ /g, '-');
 }
 
 function getOutputPath(fileName) {

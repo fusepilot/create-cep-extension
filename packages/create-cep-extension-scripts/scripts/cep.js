@@ -195,13 +195,21 @@ function writeExtensionTemplates(env, { port } = {}) {
 }
 
 function getExtenstionPath() {
-  return '/Library/Application Support/Adobe/CEP/extensions';
+  if (process.platform === 'win32') {
+    return 'C:\\Program Files (x86)\\Common Files\\Adobe\\CEP\\extensions'
+  } else {
+    return '/Library/Application Support/Adobe/CEP/extensions';
+  }
 }
 
 function getSymlinkExtensionPath() {
   const { BUNDLE_ID } = getSettings();
   const extensionPath = getExtenstionPath();
-  return path.join(process.env.HOME, extensionPath, BUNDLE_ID);
+  if (process.platform === 'win32') {
+    return path.join(extensionPath, BUNDLE_ID);
+  } else {
+    return path.join(process.env.HOME, extensionPath, BUNDLE_ID);
+  }
 }
 
 function symlinkExtension() {
