@@ -216,7 +216,11 @@ function symlinkExtension() {
   fs.ensureDirSync(getExtenstionPath());
   let target = getSymlinkExtensionPath();
   fs.removeSync(target);
-  fs.symlinkSync(paths.appBuild, target);
+  if (process.platform === 'win32') {
+    fs.symlinkSync(paths.appBuild, target, 'junction');
+  } else {
+    fs.symlinkSync(paths.appBuild, target);
+  }
 }
 
 function printCEPExtensionLocation() {
