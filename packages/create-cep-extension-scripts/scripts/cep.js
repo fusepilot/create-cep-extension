@@ -20,8 +20,8 @@ function getSettings() {
     BUNDLE_ID: process.env.BUNDLE_ID || 'my.cep.extension',
     BUNDLE_VERSION: process.env.BUNDLE_VERSION || VERSION || '1.0.0',
     CEP_VERSION: process.env.CEP_VERSION || '',
-    PANEL_WIDTH: process.env.PANEL_WIDTH || '',
-    PANEL_HEIGHT: process.env.PANEL_HEIGHT || '',
+    PANEL_WIDTH: process.env.PANEL_WIDTH || '500',
+    PANEL_HEIGHT: process.env.PANEL_HEIGHT || '500',
     CEF_PARAMS: process.env.CEF_PARAMS || '',
     AUTO_OPEN_REMOTE_DEBUGGER: process.env.AUTO_OPEN_REMOTE_DEBUGGER || '',
     ENABLE_PLAYERDEBUGMODE: process.env.ENABLE_PLAYERDEBUGMODE || '',
@@ -179,6 +179,8 @@ function writeExtensionTemplates(env, { port } = {}) {
     bundleId: BUNDLE_ID,
     version: VERSION,
     hosts,
+    width: PANEL_WIDTH,
+    height: PANEL_HEIGHT,
     bundleVersion: BUNDLE_VERSION,
   });
   fs.writeFileSync(
@@ -196,7 +198,7 @@ function writeExtensionTemplates(env, { port } = {}) {
 
 function getExtenstionPath() {
   if (process.platform === 'win32') {
-    return 'C:\\Program Files (x86)\\Common Files\\Adobe\\CEP\\extensions'
+    return 'C:\\Program Files (x86)\\Common Files\\Adobe\\CEP\\extensions';
   } else {
     return '/Library/Application Support/Adobe/CEP/extensions';
   }
