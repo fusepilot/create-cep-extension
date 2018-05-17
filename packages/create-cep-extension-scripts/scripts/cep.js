@@ -142,7 +142,15 @@ function openChromeRemoteDebugger() {
 }
 
 function writeExtensionTemplates(env, { port } = {}) {
-  const { NAME, VERSION, BUNDLE_ID, BUNDLE_VERSION, HOSTS } = getSettings();
+  const {
+    NAME,
+    VERSION,
+    BUNDLE_ID,
+    BUNDLE_VERSION,
+    HOSTS,
+    PANEL_WIDTH,
+    PANEL_HEIGHT,
+  } = getSettings();
 
   // make sure the CSXS folder exists
   if (!fs.existsSync(paths.appBuild)) fs.mkdirSync(paths.appBuild);
