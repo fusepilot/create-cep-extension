@@ -2,7 +2,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
 const { execSync, spawn } = require('child_process');
-const debugTemplate = require('./templates/.debug');
+const debugTemplate = require('./templates/debug');
 const manifestTemplate = require('./templates/manifest');
 const panelTemplate = require('./templates/panel');
 require('dotenv').config({ silent: true });
