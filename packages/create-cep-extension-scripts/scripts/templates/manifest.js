@@ -13,6 +13,7 @@ module.exports = function({
     '--enable-nodejs',
     '--mixed-context',
   ],
+  icon: { normal = '', rollover = '', darkNormal = '', darkRollover = '' },
 }) {
   var commandLineParams = cefParams.map(
     cefParam => `<Parameter>${cefParam}</Parameter>`
@@ -57,6 +58,12 @@ module.exports = function({
               <Width>${width}</Width>
             </Size>
           </Geometry>
+          <Icons>
+            <Icon Type="Normal">${normal}</Icon>
+            <Icon Type="RollOver">${rollover}</Icon>
+            <Icon Type="DarkNormal">${darkNormal}</Icon>
+            <Icon Type="DarkRollOver">${darkRollover}</Icon>
+          </Icons>
         </UI>
       </DispatchInfo>
     </Extension>

@@ -36,6 +36,10 @@ function getSettings() {
     CERTIFICATE_PROVINCE: process.env.CERTIFICATE_PROVINCE || 'CA',
     CERTIFICATE_ORG: process.env.CERTIFICATE_ORG || 'org',
     CERTIFICATE_NAME: process.env.CERTIFICATE_NAME || 'name',
+    ICON_NORMAL: process.env.ICON_NORMAL || '',
+    ICON_ROLLOVER: process.env.ICON_ROLLOVER || '',
+    ICON_DARK_NORMAL: process.env.ICON_DARK_NORMAL || '',
+    ICON_DARK_ROLLOVER: process.env.ICON_DARK_ROLLOVER || '',
   };
 }
 
@@ -150,6 +154,10 @@ function writeExtensionTemplates(env, { port } = {}) {
     HOSTS,
     PANEL_WIDTH,
     PANEL_HEIGHT,
+    ICON_NORMAL,
+    ICON_ROLLOVER,
+    ICON_DARK_NORMAL,
+    ICON_DARK_ROLLOVER,
   } = getSettings();
 
   // make sure the CSXS folder exists
@@ -190,6 +198,12 @@ function writeExtensionTemplates(env, { port } = {}) {
     width: PANEL_WIDTH,
     height: PANEL_HEIGHT,
     bundleVersion: BUNDLE_VERSION,
+    icon: {
+      normal: ICON_NORMAL,
+      rollover: ICON_ROLLOVER,
+      darkNormal: ICON_DARK_NORMAL,
+      darkRollover: ICON_DARK_ROLLOVER,
+    },
   });
   fs.writeFileSync(
     path.join(paths.appBuild, 'CSXS/manifest.xml'),
