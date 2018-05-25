@@ -143,6 +143,17 @@ HOSTS="ILST, IDSN@*, PHXS@6.0, AEFT@[5.0,10.0]"
 
 This will target all versions of Illustrator and In Design, Photoshop 6.0, and After Effects 5.0 - 10.0.
 
+### Icon
+
+To add a custom panel icon, add all [icon files](https://github.com/Adobe-CEP/CEP-Resources/blob/master/CEP_8.x/Documentation/CEP%208.0%20HTML%20Extension%20Cookbook.md#high-dpi-panel-icons) inside the `public` folder and set their paths inside your `.env` file:
+
+```bash
+ICON_NORMAL="./assets/icon-normal.png"
+ICON_ROLLOVER="./assets/icon-rollover.png"
+ICON_DARK_NORMAL="./assets/icon-dark.png"
+ICON_DARK_ROLLOVER="./assets/icon-dark-rollover.png"
+```
+
 ### Cerificate Variables
 
 In order to create a valid ZXP, you will need to provide the following variables replaced with the correct information inside your `.env`.
