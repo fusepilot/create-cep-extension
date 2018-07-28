@@ -1,3 +1,5 @@
+> Notice: I encourage you to check out [parcel-cep-plugin](https://github.com/fusepilot/parcel-plugin-cep). It's a more maintainable approach to the same problem that has a _much_ smaller codebase than a fork [create-react-app](https://github.com/facebookincubator/create-react-app) ever will. [Parcel](https://github.com/parcel-bundler/parcel) also has many [benefits](https://github.com/parcel-bundler/parcel#features) that should be enticing enough to consider switching.
+
 # Create CEP Extension
 
 Create CEP Extensions with no build configuration. Closely matches functionality from [Create React App](https://github.com/facebookincubator/create-react-app).
