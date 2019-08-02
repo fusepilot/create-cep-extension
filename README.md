@@ -4,8 +4,8 @@
 
 Create CEP Extensions with no build configuration. Closely matches functionality from [Create React App](https://github.com/facebookincubator/create-react-app).
 
-* [Getting Started](#getting-started) – How to create a new app.
-* [User Guide](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md) – How to develop apps bootstrapped with Create React App.
+- [Getting Started](#getting-started) – How to create a new app.
+- [User Guide](https://github.com/facebookincubator/create-react-app/blob/master/packages/create-cep-extension-scripts/template/README.md) – How to develop apps bootstrapped with Create React App.
 
 Create React App works on macOS, Windows, and Linux.<br>
 If something doesn’t work please [file an issue](https://github.com/facebookincubator/create-react-app/issues/new).
@@ -120,12 +120,12 @@ You can then send the ZXP archive to your users to install using a ZXP installer
 
 ## Environment Variables
 
-You can customize the name of the extension and multiple other variables by modifying the `.env` file. 
+You can customize the name of the extension and multiple other variables by modifying the `.env` file.
 
-````bash
+```bash
 NAME="My Extension"
 BUNDLE_ID="com.mycompany.myextension"
-````
+```
 
 ### Hosts
 
@@ -133,17 +133,25 @@ By default, the extension will target all known Adobe hosts. To target specific 
 
 For example, to target just Illustrator and After Effects, you would add this to your `.env` file:
 
-````bash
+```bash
 HOSTS="ILST, AEFT"
-````
+```
 
 And to target specific versions:
 
-````bash
+```bash
 HOSTS="ILST, IDSN@*, PHXS@6.0, AEFT@[5.0,10.0]"
-````
+```
 
 This will target all versions of Illustrator and In Design, Photoshop 6.0, and After Effects 5.0 - 10.0.
+
+### Type
+
+Sets the type of window. Options are `ModalDialog`, `Modeless`, `Panel` is default.
+
+```bash
+UI_TYPE=ModalDialog
+```
 
 ### Icon
 
@@ -176,31 +184,31 @@ There are few functions that you can import from the `cep-interface` package to 
 
 Loads and evaluates the specified file in the src/extendscript directory. Returns a promise with the result.
 
-````javascript
-import { loadExtendscript } from 'cep-interface'
+```javascript
+import { loadExtendscript } from 'cep-interface';
 
-loadExtendscript('index.jsx')
-````
+loadExtendscript('index.jsx');
+```
 
 ### `evalExtendscript(code: string): Promise`
 
 Evaluates the specified code. Returns a Promise.
 
-````javascript
-import { evalExtendscript } from 'cep-interface'
+```javascript
+import { evalExtendscript } from 'cep-interface';
 
-evalExtendscript('$.writeln("Hello Foo");') // writes "Hello Foo" to the info panel
-````
+evalExtendscript('$.writeln("Hello Foo");'); // writes "Hello Foo" to the info panel
+```
 
 If you return a JSON string using [json2](https://github.com/douglascrockford/JSON-js) or similar from Extendscript, you can get the parsed result.
 
-````javascript
-import { evalExtendscript } from 'cep-interface'
+```javascript
+import { evalExtendscript } from 'cep-interface';
 
 evalExtendscript('JSON.stringifiy({foo: "bar"});')
   .then(result => console.log(result)) // prints {foo: "bar"}
-  .catch(error => console.warn(error))
-````
+  .catch(error => console.warn(error));
+```
 
 ## Other functions
 
@@ -208,11 +216,11 @@ There are a few other functions available in addition.
 
 ### `openURLInDefaultBrowser(url: string)`
 
-````javascript
-import { openURLInDefaultBrowser } from 'cep-interface'
+```javascript
+import { openURLInDefaultBrowser } from 'cep-interface';
 
-openURLInDefaultBrowser('www.google.com')
-````
+openURLInDefaultBrowser('www.google.com');
+```
 
 Opens the url in the default browser. Will also work when viewing outside the target application in a browser.
 
@@ -222,6 +230,6 @@ We'd love to have your helping hand on `create-cep-extension`! See [CONTRIBUTING
 
 ## Todo
 
-* Improve target host configuration per [#4](https://github.com/fusepilot/create-cep-extension/pull/4).
-* Create ````.jsxbin````'s automatically and smoothly. Adobe has made this nearly impossible to do on macOS, so not sure if its worth the trouble. Especially since .jsxbin doesn't really deter hackers.
-* Testing.
+- Improve target host configuration per [#4](https://github.com/fusepilot/create-cep-extension/pull/4).
+- Create `.jsxbin`'s automatically and smoothly. Adobe has made this nearly impossible to do on macOS, so not sure if its worth the trouble. Especially since .jsxbin doesn't really deter hackers.
+- Testing.

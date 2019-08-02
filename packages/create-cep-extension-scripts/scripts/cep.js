@@ -20,7 +20,7 @@ function getSettings() {
     BUNDLE_ID: process.env.BUNDLE_ID || 'my.cep.extension',
     BUNDLE_VERSION: process.env.BUNDLE_VERSION || VERSION || '1.0.0',
     CEP_VERSION: process.env.CEP_VERSION || '',
-    UI_TYPE: process.env.UI_TYPE || 'Panel',//Panel,ModalDialog,Modeless,default Panel.
+    UI_TYPE: process.env.UI_TYPE || 'Panel',
     PANEL_WIDTH: process.env.PANEL_WIDTH || '500',
     PANEL_HEIGHT: process.env.PANEL_HEIGHT || '500',
     CEF_PARAMS: process.env.CEF_PARAMS || '',
