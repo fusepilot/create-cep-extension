@@ -13,7 +13,7 @@
       "prettier --trailing-comma es5 --single-quote --write 'packages/*/*.js' 'packages/*/!(node_modules)/**/*.js'"
   },
   "devDependencies": {
-    "eslint": "3.16.1",
+    "eslint": "4.18.2",
     "husky": "^0.13.2",
     "lerna": "2.0.0-rc.3",
     "lerna-changelog": "^0.2.3",
