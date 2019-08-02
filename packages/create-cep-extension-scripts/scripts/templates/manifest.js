@@ -5,6 +5,7 @@ module.exports = function({
   hosts,
   bundleVersion = '1.0.0',
   cepVersion = '6.0',
+  uiType = 'Panel',
   width = '500',
   height = '500',
   cefParams = [
@@ -50,7 +51,7 @@ module.exports = function({
           <AutoVisible>true</AutoVisible>
         </Lifecycle>
         <UI>
-          <Type>Panel</Type>
+          <Type>${uiType}</Type>
           <Menu>${bundleName}</Menu>
           <Geometry>
             <Size>
