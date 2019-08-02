@@ -20,6 +20,7 @@ function getSettings() {
     BUNDLE_ID: process.env.BUNDLE_ID || 'my.cep.extension',
     BUNDLE_VERSION: process.env.BUNDLE_VERSION || VERSION || '1.0.0',
     CEP_VERSION: process.env.CEP_VERSION || '',
+    UI_TYPE: process.env.UI_TYPE || 'Panel',//Panel,ModalDialog,Modeless,default Panel.
     PANEL_WIDTH: process.env.PANEL_WIDTH || '500',
     PANEL_HEIGHT: process.env.PANEL_HEIGHT || '500',
     CEF_PARAMS: process.env.CEF_PARAMS || '',
@@ -152,6 +153,7 @@ function writeExtensionTemplates(env, { port } = {}) {
     BUNDLE_ID,
     BUNDLE_VERSION,
     HOSTS,
+    UI_TYPE,
     PANEL_WIDTH,
     PANEL_HEIGHT,
     ICON_NORMAL,
@@ -195,6 +197,7 @@ function writeExtensionTemplates(env, { port } = {}) {
     bundleId: BUNDLE_ID,
     version: VERSION,
     hosts,
+    uiType: UI_TYPE,
     width: PANEL_WIDTH,
     height: PANEL_HEIGHT,
     bundleVersion: BUNDLE_VERSION,
